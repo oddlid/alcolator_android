@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TableLayout
+        android:id="@+id/tblAlcForm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp">
+
+            <TextView
+                android:id="@+id/txtTag"
+                android:layout_marginEnd="16dp"
+                android:text="@string/frmAdd_lblTagTxt"
+                android:labelFor="@id/etTag"
+                tools:text="Pub/Tag:" />
+
+            <EditText
+                android:id="@+id/etTag"
+                android:inputType="text"
+                android:autofillHints=""
+                tools:text="OT" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp">
+
+            <TextView
+                android:layout_marginEnd="16dp"
+                android:text="@string/frmAdd_lblNameTxt"
+                android:labelFor="@id/etName"
+                tools:text="Drink name:" />
+
+            <EditText
+                android:id="@+id/etName"
+                android:inputType="text"
+                tools:text="Sitting Bulldog"
+                android:importantForAutofill="no" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp">
+
+            <TextView
+                android:layout_marginEnd="16dp"
+                android:text="@string/frmAdd_lblVolTxt"
+                android:labelFor="@id/etVol"
+                tools:text="Drink volume (ml):" />
+
+            <EditText
+                android:id="@+id/etVol"
+                android:inputType="number"
+                tools:text="500"
+                android:importantForAutofill="no" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp">
+
+            <TextView
+                android:layout_marginEnd="16dp"
+                android:text="@string/frmAdd_lblPctTxt"
+                android:labelFor="@id/etPct"
+                tools:text="Drink percentage:" />
+
+            <EditText
+                android:id="@+id/etPct"
+                android:inputType="numberDecimal"
+                tools:text="6,4"
+                android:importantForAutofill="no" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp">
+
+            <TextView
+                android:layout_marginEnd="16dp"
+                android:text="@string/frmAdd_lblPriceTxt"
+                android:labelFor="@id/etPrice"
+                tools:text="Drink price:" />
+
+            <EditText
+                android:id="@+id/etPrice"
+                android:inputType="numberDecimal"
+                tools:text="69.5"
+                android:importantForAutofill="no" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp">
+
+            <Button
+                android:id="@+id/btnCancel"
+                android:text="@string/frmAdd_btnCancelTxt"
+                tools:text="Cancel" />
+
+            <Button
+                android:id="@+id/btnAdd"
+                android:text="@string/frmAdd_btnAddTxt"
+                tools:text="Add" />
+        </TableRow>
+
+    </TableLayout>
+
+    <!--
+    <de.codecrafters.tableview.SortableTableView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tblAlcForm">
+
+    </de.codecrafters.tableview.SortableTableView>
+    -->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

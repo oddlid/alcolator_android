@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Alcolator</string>
+    <string name="frmAdd_lblTagTxt">Pub/tag:</string>
+    <string name="frmAdd_lblNameTxt">Drink name:</string>
+    <string name="frmAdd_lblVolTxt">Drink volume (ml):</string>
+    <string name="frmAdd_lblPctTxt">Drink percentage:</string>
+    <string name="frmAdd_lblPriceTxt">Drink price:</string>
+    <string name="frmAdd_btnAddTxt">Add</string>
+    <string name="frmAdd_btnCancelTxt">Cancel</string>
+    <string name="colHdr0">Tag</string>
+    <string name="colHdr1">Name</string>
+    <string name="colHdr2">Vol (ml)</string>
+    <string name="colHdr3">%</string>
+    <string name="colHdr4">Water</string>
+    <string name="colHdr5">Alc</string>
+    <string name="colHdr6"># ml/drink</string>
+    <string name="colHdr7"># ml/alc</string>
+</resources>

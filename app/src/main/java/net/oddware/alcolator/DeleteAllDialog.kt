@@ -26,12 +26,12 @@ class DeleteAllDialog : DialogFragment() {
         super.onCreateDialog(savedInstanceState)
         val builder = AlertDialog.Builder(activity)
         with(builder) {
-            setMessage(R.string.dlgDel_msgTxt)
-            setPositiveButton(R.string.dlgDel_btnOkTxt) { dlgInterface, _ ->
+            setMessage(R.string.dlgDelAll_msgTxt)
+            setPositiveButton(R.string.dlgDelAll_btnOkTxt) { dlgInterface, _ ->
                 listener?.onPositiveClick(this@DeleteAllDialog)
                 dlgInterface.dismiss()
             }
-            setNegativeButton(R.string.dlgDel_btnCancelTxt) { dlgInterface, _ ->
+            setNegativeButton(R.string.dlgDelAll_btnCancelTxt) { dlgInterface, _ ->
                 listener?.onNegativeClick(this@DeleteAllDialog)
                 dlgInterface.cancel()
             }

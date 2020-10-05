@@ -96,7 +96,7 @@ class AddDrinkFragment : Fragment() {
 
         if (AddDrinkActivity.CFG_ACTION_EDIT == cfgAction) {
             drinkViewModel.get(drinkID).observe(viewLifecycleOwner, Observer {
-                if (it != null) {
+                if (null != it) {
                     updateUI(it)
                 }
             })
@@ -104,6 +104,7 @@ class AddDrinkFragment : Fragment() {
     }
 
     private fun updateUI(drink: Drink?) {
+        drinkObj = drink
         etTag.setText(drink?.tag)
         etName.setText(drink?.name)
         etVol.setText(drink?.volumeML.toString())

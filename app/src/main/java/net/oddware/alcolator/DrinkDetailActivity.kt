@@ -23,7 +23,7 @@ class DrinkDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_drink_detail)
-        title = "Drink details"
+        title = getString(R.string.act_DrinkDetailsTitle)
 
         val drinkID = intent.getIntExtra(DRINK_ID, INVALID_ID)
         Timber.d("Creating DrinkDetailFragment with drinkID $drinkID")

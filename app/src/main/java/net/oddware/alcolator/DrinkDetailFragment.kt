@@ -1,9 +1,12 @@
 package net.oddware.alcolator
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -11,7 +14,9 @@ import kotlinx.android.synthetic.main.fragment_drink_detail.*
 import kotlinx.android.synthetic.main.fragment_drink_detail.view.*
 import timber.log.Timber
 
-class DrinkDetailFragment(private val drinkID: Int = DrinkDetailActivity.INVALID_ID) : Fragment() {
+class DrinkDetailFragment(private val drinkID: Int = DrinkDetailActivity.INVALID_ID) :
+    Fragment(),
+    DeleteOneDialog.DeleteOneDialogListener {
 
     private var drinkObj: Drink? = null
     private lateinit var drinkViewModel: DrinkViewModel
@@ -27,6 +32,40 @@ class DrinkDetailFragment(private val drinkID: Int = DrinkDetailActivity.INVALID
             activity?.finish()
         }
 
+        view.btnDelete.setOnClickListener {
+            Timber.d("Delete clicked, checking for Fragment Manager...")
+            val fm = activity?.supportFragmentManager ?: return@setOnClickListener
+            Timber.d("We have a Fragment Manager...")
+            val dod = DeleteOneDialog()
+            dod.arguments = Bundle().apply {
+                putString(DeleteOneDialog.DRINK_NAME, drinkObj?.name)
+            }
+            dod.listener = this
+            dod.show(fm, "ConfirmDeleteOne")
+        }
+
+        view.btnEdit.setOnClickListener {
+            context?.let {
+                drinkObj?.run {
+                    startActivityForResult(
+                        AddDrinkActivity.getLaunchIntent(
+                            it,
+                            AddDrinkActivity.CFG_ACTION_EDIT,
+                            id
+                        ),
+                        AddDrinkActivity.CFG_ACTION_EDIT
+                    )
+                    // This didn't do anything...hmmm
+                    //drinkViewModel.get(id).observe(viewLifecycleOwner, Observer {
+                    //    if (null != it) {
+                    //        updateUI(it)
+                    //    }
+                    //})
+                    //activity?.finish()
+                }
+            }
+        }
+
         Timber.d("DrinkDetailFragment created")
         return view
     }
@@ -37,10 +76,8 @@ class DrinkDetailFragment(private val drinkID: Int = DrinkDetailActivity.INVALID
 
         if (DrinkDetailActivity.INVALID_ID != drinkID) {
             Timber.d("Loading drink with id $drinkID")
-            //drinkObj = drinkViewModel.get(drinkID)
-            //updateUI(drinkObj)
             drinkViewModel.get(drinkID).observe(viewLifecycleOwner, Observer {
-                if (it != null) {
+                if (null != it) {
                     updateUI(it)
                 }
             })
@@ -50,6 +87,7 @@ class DrinkDetailFragment(private val drinkID: Int = DrinkDetailActivity.INVALID
     }
 
     private fun updateUI(d: Drink?) {
+        drinkObj = d
         tvIDVal.text = d?.id.toString()
         tvTagVal.text = d?.tag
         tvNameVal.text = d?.name
@@ -60,5 +98,40 @@ class DrinkDetailFragment(private val drinkID: Int = DrinkDetailActivity.INVALID
         tvPricePerMLDrinkVal.text = d?.pricePerDrinkML().toString()
         tvVolWaterVal.text = d?.waterML().toString()
         tvVolAlcVal.text = d?.alcML().toString()
+    }
+
+    override fun onPositiveClick(df: DialogFragment) {
+        val d = drinkObj ?: return
+        Timber.d("Deleting \"${d.name}\"")
+        drinkViewModel.remove(d)
+        activity?.finish()
+    }
+
+    override fun onNegativeClick(df: DialogFragment) {
+        Timber.d("Delete cancelled")
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        when (requestCode) {
+            AddDrinkActivity.CFG_ACTION_EDIT -> {
+                if (Activity.RESULT_OK == resultCode) {
+                    data?.run {
+                        val drinkID = getIntExtra(
+                            AddDrinkActivity.DRINK_CFG_ID,
+                            DrinkDetailActivity.INVALID_ID
+                        )
+                        if (DrinkDetailActivity.INVALID_ID != drinkID) {
+                            drinkViewModel.get(drinkID).observe(viewLifecycleOwner, Observer {
+                                if (null != it) {
+                                    updateUI(it)
+                                }
+                            })
+                        }
+                    }
+                }
+            }
+        }
     }
 }

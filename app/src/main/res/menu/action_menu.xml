@@ -5,6 +5,6 @@
         android:id="@+id/action_delete_all"
         android:icon="@android:drawable/ic_menu_delete"
         android:orderInCategory="100"
-        android:title="Delete all drinks"
+        android:title="@string/menu_delAllTxt"
         app:showAsAction="always" />
 </menu>

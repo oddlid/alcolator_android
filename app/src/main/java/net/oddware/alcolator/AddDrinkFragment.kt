@@ -33,7 +33,7 @@ class AddDrinkFragment : Fragment() {
             drinkObj = Drink(id = drinkID)
         }
 
-        view.btnAdd.setOnClickListener {
+        view.btnSave.setOnClickListener {
             drinkObj?.run {
                 //id = drinkID
                 tag = view.etTag.text.toString().trim()

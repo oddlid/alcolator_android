@@ -3,12 +3,16 @@ package net.oddware.alcolator
 import android.content.Context
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import de.codecrafters.tableview.TableDataAdapter
+import timber.log.Timber
 
 class DrinkTableAdapter(
-    private val ctx: Context,
-    private val drinks: List<Drink>
+    private val ctx: Context?,
+    private val drinks: List<Drink>,
+    private val frag: Fragment
 ) : TableDataAdapter<Drink>(ctx, drinks) {
     companion object {
         const val PAD_TOP = 1
@@ -20,30 +24,53 @@ class DrinkTableAdapter(
 
     override fun getCellView(rowIndex: Int, columnIndex: Int, parentView: ViewGroup?): View {
         val drink = getRowData(rowIndex)
-        var renderedView = View(context)
 
-        when (columnIndex) {
-            0 -> renderedView = renderCell(drink.tag)
-            1 -> renderedView = renderCell(drink.name)
-            2 -> renderedView = renderCell(drink.volumeML.toString())
-            3 -> renderedView = renderCell(drink.waterML().toString())
-            4 -> renderedView = renderCell(drink.alcML().toString())
-            5 -> renderedView = renderCell(drink.pricePerDrinkML().toString())
-            6 -> renderedView = renderCell(drink.pricePerAlcML().toString())
+        return when (columnIndex) {
+            //0 -> renderCell(drink.tag)
+            //1 -> renderCell(drink.name)
+            //2 -> renderCell(drink.volumeML.toString())
+            //3 -> renderCell(drink.waterML().toString())
+            //4 -> renderCell(drink.alcML().toString())
+            //5 -> renderCell(drink.pricePerDrinkML().toString())
+            //6 -> renderCell(drink.pricePerAlcML().toString())
+            // New variant
+            //0 -> renderCell(drink.name)
+            0 -> renderButton(drink)
+            1 -> renderCell(drink.volumeML.toString())
+            2 -> renderCell(drink.price.toString())
+            3 -> renderCell(drink.alcPct.toString())
+            4 -> renderCell(drink.alcML().toString())
+            5 -> renderCell(drink.pricePerAlcML().toString())
+            else -> return View(context)
         }
-        return renderedView
     }
 
     private fun renderCell(txt: String): View {
-        //val tv = TextView(context)
-        //tv.text = txt
-        //tv.setPadding(PAD_LEFT, PAD_TOP, PAD_RIGHT, PAD_BOTTOM)
-        //tv.textSize = TEXT_SIZE
-        //return tv
-        return TextView(context).apply {
+        return TextView(ctx).apply {
             text = txt
             setPadding(PAD_LEFT, PAD_TOP, PAD_RIGHT, PAD_BOTTOM)
             textSize = TEXT_SIZE
+        }
+    }
+
+    private fun renderButton(d: Drink): View {
+        return Button(ctx).apply {
+            text = d.name
+            setPadding(PAD_LEFT, PAD_TOP, PAD_RIGHT, PAD_BOTTOM)
+            textSize = TEXT_SIZE
+            setOnClickListener { _ ->
+                Timber.d("Button for \"$text\" was clicked...")
+                ctx?.let {
+                    Timber.d("Creating DrinkDetailActivity with drinkID ${d.id}")
+                    frag.startActivityForResult(
+                        DrinkDetailActivity.getLaunchIntent(
+                            it,
+                            d.id
+                        ),
+                        DrinkDetailActivity.DRINK_ACTION_VIEW
+                    )
+                }
+            }
         }
     }
 }

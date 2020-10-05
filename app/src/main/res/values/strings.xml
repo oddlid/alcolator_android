@@ -5,14 +5,28 @@
     <string name="frmAdd_lblVolTxt">Drink volume (ml):</string>
     <string name="frmAdd_lblPctTxt">Drink percentage:</string>
     <string name="frmAdd_lblPriceTxt">Drink price:</string>
-    <string name="frmAdd_btnAddTxt">Add</string>
+    <string name="frmAdd_btnAddTxt">Save</string>
     <string name="frmAdd_btnCancelTxt">Cancel</string>
-    <string name="colHdr0">Tag</string>
-    <string name="colHdr1">Name</string>
-    <string name="colHdr2">Vol (ml)</string>
-    <string name="colHdr3">%</string>
-    <string name="colHdr4">Water</string>
-    <string name="colHdr5">Alc</string>
-    <string name="colHdr6"># ml/drink</string>
-    <string name="colHdr7"># ml/alc</string>
+    <string name="det_tvTagLblTxt">Pub/tag:</string>
+    <string name="det_tvNameLblTxt">Drink name:</string>
+    <string name="det_tvIDLblTxt">ID:</string>
+    <string name="det_tvVolLblTxt">Volume (ml):</string>
+    <string name="det_tvPctLblTxt">Percentage:</string>
+    <string name="det_tvPriceLblTxt">Price:</string>
+    <string name="det_tvPricePerMLAlcLblTxt">Price per ml alcohol:</string>
+    <string name="det_tvPricePerMLDrinkLblTxt">Price per ml drink:</string>
+    <string name="det_tvVolWaterLblTxt">Amount of water (ml):</string>
+    <string name="det_tvVolAlcLblTxt">Amount of alcohol (ml):</string>
+    <string name="det_btnEditTxt">Edit</string>
+    <string name="det_btnDeleteTxt">Delete</string>
+    <string name="det_btnCloseTxt">Close</string>
+
+    <string-array name="colHdrs">
+        <item>Name</item>
+        <item>ML</item>
+        <item>#</item>
+        <item>%</item>
+        <item>Alc</item>
+        <item># Alc</item>
+    </string-array>
 </resources>

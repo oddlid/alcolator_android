@@ -19,4 +19,7 @@ interface DrinkDao {
 
     @Update
     suspend fun update(drink: Drink)
+
+    @Query("SELECT * FROM drinks WHERE id == :id")
+    suspend fun get(id: Int): Drink
 }

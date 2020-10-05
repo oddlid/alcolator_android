@@ -3,7 +3,6 @@ package net.oddware.alcolator
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
 import timber.log.Timber
 
@@ -21,18 +20,15 @@ class DrinkDetailActivity : AppCompatActivity() {
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_drink_detail)
+        title = "Drink details"
 
         val drinkID = intent.getIntExtra(DRINK_ID, INVALID_ID)
         Timber.d("Creating DrinkDetailFragment with drinkID $drinkID")
-        val fragDetail = DrinkDetailFragment(drinkID)
-        //with(intent) {
-        //    fragDetail.drinkID = getIntExtra(DRINK_ID, INVALID_ID)
-        //}
         with(supportFragmentManager.beginTransaction()) {
-            replace(R.id.flDrinkDetail, fragDetail)
+            replace(R.id.flDrinkDetail, DrinkDetailFragment(drinkID))
             commit()
         }
 

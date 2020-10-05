@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.fragment_drink_detail.*
 import kotlinx.android.synthetic.main.fragment_drink_detail.view.*
@@ -12,7 +13,6 @@ import timber.log.Timber
 
 class DrinkDetailFragment(private val drinkID: Int = DrinkDetailActivity.INVALID_ID) : Fragment() {
 
-    //var drinkID = AddDrinkActivity.INVALID_IDX
     private var drinkObj: Drink? = null
     private lateinit var drinkViewModel: DrinkViewModel
 
@@ -27,7 +27,7 @@ class DrinkDetailFragment(private val drinkID: Int = DrinkDetailActivity.INVALID
             activity?.finish()
         }
 
-        Timber.d("Fragment created")
+        Timber.d("DrinkDetailFragment created")
         return view
     }
 
@@ -37,8 +37,13 @@ class DrinkDetailFragment(private val drinkID: Int = DrinkDetailActivity.INVALID
 
         if (DrinkDetailActivity.INVALID_ID != drinkID) {
             Timber.d("Loading drink with id $drinkID")
-            drinkObj = drinkViewModel.get(drinkID)
-            updateUI(drinkObj)
+            //drinkObj = drinkViewModel.get(drinkID)
+            //updateUI(drinkObj)
+            drinkViewModel.get(drinkID).observe(viewLifecycleOwner, Observer {
+                if (it != null) {
+                    updateUI(it)
+                }
+            })
         } else {
             Timber.e("Got invalid drink ID (${DrinkDetailActivity.INVALID_ID})")
         }

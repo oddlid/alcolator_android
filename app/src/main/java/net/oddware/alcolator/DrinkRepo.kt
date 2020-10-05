@@ -48,8 +48,8 @@ class DrinkRepo(private val drinkDao: DrinkDao) {
         drinkDao.delete(drink)
     }
 
-    fun get(index: Int): Drink? {
+    suspend fun get(id: Int): Drink? {
         Timber.d("Finding drink in database")
-        return drinks.get(index)
+        return drinkDao.get(id)
     }
 }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -22,11 +23,31 @@
             android:layout_marginEnd="@dimen/lbl_def_margin">
 
             <TextView
+                android:id="@+id/tvNameLbl"
+                android:layout_marginEnd="@dimen/lbl_def_margin"
+                android:gravity="end"
+                android:text="@string/det_tvNameLblTxt" />
+
+            <TextView
+                android:id="@+id/tvNameVal"
+                tools:text="Sitting Bulldog" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/lbl_def_margin"
+            android:layout_marginEnd="@dimen/lbl_def_margin">
+
+            <TextView
                 android:id="@+id/tvIDLbl"
                 android:layout_marginEnd="@dimen/lbl_def_margin"
+                android:gravity="end"
                 android:text="@string/det_tvIDLblTxt" />
 
-            <TextView android:id="@+id/tvIDVal" />
+            <TextView
+                android:id="@+id/tvIDVal"
+                tools:text="2" />
         </TableRow>
 
         <TableRow
@@ -37,24 +58,13 @@
 
             <TextView
                 android:id="@+id/tvTagLbl"
+                android:gravity="end"
                 android:layout_marginEnd="@dimen/lbl_def_margin"
                 android:text="@string/det_tvTagLblTxt" />
 
-            <TextView android:id="@+id/tvTagVal" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/lbl_def_margin"
-            android:layout_marginEnd="@dimen/lbl_def_margin">
-
             <TextView
-                android:id="@+id/tvNameLbl"
-                android:layout_marginEnd="@dimen/lbl_def_margin"
-                android:text="@string/det_tvNameLblTxt" />
-
-            <TextView android:id="@+id/tvNameVal" />
+                android:id="@+id/tvTagVal"
+                tools:text="Old Town" />
         </TableRow>
 
         <TableRow
@@ -66,9 +76,12 @@
             <TextView
                 android:id="@+id/tvVolLblTxt"
                 android:layout_marginEnd="@dimen/lbl_def_margin"
+                android:gravity="end"
                 android:text="@string/det_tvVolLblTxt" />
 
-            <TextView android:id="@+id/tvVolVal" />
+            <TextView
+                android:id="@+id/tvVolVal"
+                tools:text="500" />
 
         </TableRow>
 
@@ -80,10 +93,13 @@
 
             <TextView
                 android:id="@+id/tvPctLblTxt"
+                android:gravity="end"
                 android:layout_marginEnd="@dimen/lbl_def_margin"
                 android:text="@string/det_tvPctLblTxt" />
 
-            <TextView android:id="@+id/tvPctVal" />
+            <TextView
+                android:id="@+id/tvPctVal"
+                tools:text="6.4" />
 
         </TableRow>
 
@@ -95,10 +111,13 @@
 
             <TextView
                 android:id="@+id/tvPriceLblTxt"
+                android:gravity="end"
                 android:layout_marginEnd="@dimen/lbl_def_margin"
                 android:text="@string/det_tvPriceLblTxt" />
 
-            <TextView android:id="@+id/tvPriceVal" />
+            <TextView
+                android:id="@+id/tvPriceVal"
+                tools:text="69.0" />
         </TableRow>
 
         <TableRow
@@ -109,10 +128,13 @@
 
             <TextView
                 android:id="@+id/tvPricePerMLAlcLbl"
+                android:gravity="end"
                 android:layout_marginEnd="@dimen/lbl_def_margin"
                 android:text="@string/det_tvPricePerMLAlcLblTxt" />
 
-            <TextView android:id="@+id/tvPricePerMLAlcVal" />
+            <TextView
+                android:id="@+id/tvPricePerMLAlcVal"
+                tools:text="1.23456" />
         </TableRow>
 
         <TableRow
@@ -123,10 +145,13 @@
 
             <TextView
                 android:id="@+id/tvPricePerMLDrinkLbl"
+                android:gravity="end"
                 android:layout_marginEnd="@dimen/lbl_def_margin"
                 android:text="@string/det_tvPricePerMLDrinkLblTxt" />
 
-            <TextView android:id="@+id/tvPricePerMLDrinkVal" />
+            <TextView
+                android:id="@+id/tvPricePerMLDrinkVal"
+                tools:text="1.23456" />
         </TableRow>
 
         <TableRow
@@ -137,10 +162,13 @@
 
             <TextView
                 android:id="@+id/tvVolWaterLbl"
+                android:gravity="end"
                 android:layout_marginEnd="@dimen/lbl_def_margin"
                 android:text="@string/det_tvVolWaterLblTxt" />
 
-            <TextView android:id="@+id/tvVolWaterVal" />
+            <TextView
+                android:id="@+id/tvVolWaterVal"
+                tools:text="1234" />
         </TableRow>
 
         <TableRow
@@ -151,10 +179,13 @@
 
             <TextView
                 android:id="@+id/tvVolAlcLbl"
+                android:gravity="end"
                 android:layout_marginEnd="@dimen/lbl_def_margin"
                 android:text="@string/det_tvVolAlcLblTxt" />
 
-            <TextView android:id="@+id/tvVolAlcVal" />
+            <TextView
+                android:id="@+id/tvVolAlcVal"
+                tools:text="1234" />
         </TableRow>
 
         <TableRow

@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.fragment_add_drink.*
 import kotlinx.android.synthetic.main.fragment_add_drink.view.*
@@ -94,9 +95,11 @@ class AddDrinkFragment : Fragment() {
         drinkViewModel = ViewModelProvider(this).get(DrinkViewModel::class.java)
 
         if (AddDrinkActivity.CFG_ACTION_EDIT == cfgAction) {
-            drinkObj = drinkViewModel.get(drinkID)
-            // update UI with this drink...
-            updateUI(drinkObj)
+            drinkViewModel.get(drinkID).observe(viewLifecycleOwner, Observer {
+                if (it != null) {
+                    updateUI(it)
+                }
+            })
         }
     }
 

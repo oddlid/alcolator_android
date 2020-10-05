@@ -7,36 +7,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter
+import com.sortabletableview.recyclerview.toolkit.SimpleTableHeaderAdapter
 import kotlinx.android.synthetic.main.fragment_drink_list.*
 import kotlinx.android.synthetic.main.fragment_drink_list.view.*
 import timber.log.Timber
 
 class DrinkListFragment : Fragment() {
-    //companion object {
-    //    @JvmStatic
-    //    //val TBL_HDRS = arrayOf("Pub", "Name", "Vol", "H2O", "Alc", "$ drink", "$ alc")
-    //    val TBL_HDRS = arrayOf("Name", "ML", "#", "%", "Alc", "# Alc")
-    //}
-
-    //private class DrinkClickListener(private val ctx: Context, private val frag: Fragment) : TableDataClickListener<Drink> {
-    //    override fun onDataClicked(rowIndex: Int, clickedData: Drink?) {
-    //        clickedData.let {drink ->
-    //            if (drink != null) {
-    //                frag.startActivityForResult(
-    //                    DrinkDetailActivity.getLaunchIntent(
-    //                        ctx,
-    //                        drink.id
-    //                    ),
-    //                    DrinkDetailActivity.DRINK_ACTION_VIEW
-    //                )
-    //            }
-    //        }
-    //    }
-    //}
-
     private lateinit var drinkViewModel: DrinkViewModel
-    //private lateinit var drinkTableAdapter: DrinkTableAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -62,7 +39,19 @@ class DrinkListFragment : Fragment() {
         //}
         //view.tblDrinks.columnModel = tblColWeightModel
 
-        //view.tblDrinks.addDataClickListener(DrinkClickListener(context!!, this) as Nothing)
+        view.tblDrinks.addDataClickListener { rowIndex, data ->
+            Timber.d("rowIndex: $rowIndex, drink: $data")
+            val drink = data as? Drink ?: return@addDataClickListener
+            context?.let {
+                startActivityForResult(
+                    DrinkDetailActivity.getLaunchIntent(
+                        it,
+                        drink.id
+                    ),
+                    DrinkDetailActivity.DRINK_ACTION_VIEW
+                )
+            }
+        }
 
         view.fabAddDrink.setOnClickListener {
             context?.let {
@@ -80,6 +69,21 @@ class DrinkListFragment : Fragment() {
         return view
     }
 
+    //private inline fun List<Drink>.toStringArrayList(): List<Array<String>> {
+    //    val lst = mutableListOf<Array<String>>()
+    //    for (d in this) {
+    //        lst.add(arrayOf(
+    //            d.name,
+    //            d.volumeML.toString(),
+    //            d.price.toString(),
+    //            d.alcPct.toString(),
+    //            d.alcML().toString(),
+    //            d.pricePerAlcML().toString()
+    //        ))
+    //    }
+    //    return lst
+    //}
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         drinkViewModel = ViewModelProvider(this).get(DrinkViewModel::class.java)
@@ -89,7 +93,7 @@ class DrinkListFragment : Fragment() {
                 Timber.d("Observer got a null list")
             } else {
                 Timber.d("Observer got a list with something in it: ${drinks}")
-                tblDrinks.dataAdapter = DrinkTableAdapter(context?.applicationContext, drinks, this)
+                tblDrinks.dataAdapter = DrinkTableAdapter(context, drinks)
             }
         })
     }

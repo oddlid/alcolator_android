@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+//apply plugin: 'java'
 
 android {
     compileSdkVersion 29
@@ -29,8 +30,9 @@ dependencies {
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:$rootProject.v_swipeRefreshLayout"
     implementation "androidx.core:core-ktx:$rootProject.v_coreCtx"
     implementation "com.jakewharton.timber:timber:$rootProject.v_timber"
-    // implementation "de.codecrafters.tableview:tableview:$rootProject.v_sortableTableView"
-    implementation "com.github.ISchwarz23:SortableTableView:v$rootProject.v_sortableTableView"
+    //implementation "de.codecrafters.tableview:tableview:$rootProject.v_sortableTableView"
+    //implementation "com.github.ISchwarz23:SortableTableView:v$rootProject.v_sortableTableView"
+    implementation "com.sortabletableview.recyclerview:sortabletableview:$rootProject.v_sortableTableView"
     implementation "com.google.code.gson:gson:$rootProject.v_gson"
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

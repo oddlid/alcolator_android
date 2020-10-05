@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <!--
+    -->
     <TableLayout
         android:id="@+id/tblDrinkDetail"
         android:layout_width="match_parent"
@@ -19,6 +21,7 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/lbl_def_margin"
             android:layout_marginStart="@dimen/lbl_def_margin"
             android:layout_marginEnd="@dimen/lbl_def_margin">
 
@@ -30,6 +33,7 @@
 
             <TextView
                 android:id="@+id/tvNameVal"
+                android:layout_marginStart="@dimen/lbl_def_margin"
                 tools:text="Sitting Bulldog" />
         </TableRow>
 
@@ -47,6 +51,7 @@
 
             <TextView
                 android:id="@+id/tvIDVal"
+                android:layout_marginStart="@dimen/lbl_def_margin"
                 tools:text="2" />
         </TableRow>
 
@@ -64,6 +69,7 @@
 
             <TextView
                 android:id="@+id/tvTagVal"
+                android:layout_marginStart="@dimen/lbl_def_margin"
                 tools:text="Old Town" />
         </TableRow>
 
@@ -81,6 +87,7 @@
 
             <TextView
                 android:id="@+id/tvVolVal"
+                android:layout_marginStart="@dimen/lbl_def_margin"
                 tools:text="500" />
 
         </TableRow>
@@ -99,6 +106,7 @@
 
             <TextView
                 android:id="@+id/tvPctVal"
+                android:layout_marginStart="@dimen/lbl_def_margin"
                 tools:text="6.4" />
 
         </TableRow>
@@ -117,6 +125,7 @@
 
             <TextView
                 android:id="@+id/tvPriceVal"
+                android:layout_marginStart="@dimen/lbl_def_margin"
                 tools:text="69.0" />
         </TableRow>
 
@@ -134,6 +143,7 @@
 
             <TextView
                 android:id="@+id/tvPricePerMLAlcVal"
+                android:layout_marginStart="@dimen/lbl_def_margin"
                 tools:text="1.23456" />
         </TableRow>
 
@@ -151,6 +161,7 @@
 
             <TextView
                 android:id="@+id/tvPricePerMLDrinkVal"
+                android:layout_marginStart="@dimen/lbl_def_margin"
                 tools:text="1.23456" />
         </TableRow>
 
@@ -168,6 +179,7 @@
 
             <TextView
                 android:id="@+id/tvVolWaterVal"
+                android:layout_marginStart="@dimen/lbl_def_margin"
                 tools:text="1234" />
         </TableRow>
 
@@ -185,25 +197,31 @@
 
             <TextView
                 android:id="@+id/tvVolAlcVal"
+                android:layout_marginStart="@dimen/lbl_def_margin"
                 tools:text="1234" />
         </TableRow>
 
         <TableRow
+            android:layout_marginTop="@dimen/lbl_def_margin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/lbl_def_margin"
             android:layout_marginEnd="@dimen/lbl_def_margin">
 
             <Button
-                android:id="@+id/btnEdit"
-                android:text="@string/det_btnEditTxt" />
+                android:id="@+id/btnDelete"
+                android:layout_marginEnd="@dimen/lbl_def_margin"
+                android:text="@string/det_btnDeleteTxt" />
 
             <Button
-                android:id="@+id/btnDelete"
-                android:text="@string/det_btnDeleteTxt" />
+                android:id="@+id/btnEdit"
+                android:layout_marginStart="@dimen/lbl_def_margin"
+                android:text="@string/det_btnEditTxt" />
+
         </TableRow>
 
         <TableRow
+            android:layout_marginTop="@dimen/lbl_def_margin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/lbl_def_margin"

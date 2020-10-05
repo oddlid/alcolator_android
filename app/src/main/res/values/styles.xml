@@ -6,6 +6,17 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textViewStyle">@style/AppTheme.TextViewStyle</item>
     </style>
+
+    <style name="AppTheme.TextViewStyle" parent="@android:style/Widget.Material.TextView">
+        <item name="android:textAppearance">?attr/textAppearanceListItem</item>
+    </style>
+
+    <!--
+    <style name="AppTheme.DrinkDetails" parent="AppTheme">
+        <item name="android:textAppearance">?attr/textAppearanceListItem</item>
+    </style>
+    -->
 
 </resources>

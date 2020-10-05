@@ -5,11 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.sortabletableview.recyclerview.TableView
+    <com.sortabletableview.recyclerview.SortableTableView
         android:id="@+id/tblDrinks"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        table:tableView_columnCount="7" />
+        table:tableView_columnCount="6" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAddDrink"

@@ -20,6 +20,9 @@
     <string name="det_btnEditTxt">Edit</string>
     <string name="det_btnDeleteTxt">Delete</string>
     <string name="det_btnCloseTxt">Close</string>
+    <string name="dlgDel_msgTxt">Delete all drinks?</string>
+    <string name="dlgDel_btnOkTxt">Delete</string>
+    <string name="dlgDel_btnCancelTxt">Cancel</string>
 
     <string-array name="colHdrs">
         <item>Name</item>

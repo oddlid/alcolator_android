@@ -6,6 +6,7 @@
     android:layout_height="wrap_content">
 
     <TableLayout
+        android:layout_marginTop="@dimen/lbl_def_margin"
         android:id="@+id/tblAlcForm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -29,7 +30,7 @@
             <EditText
                 android:id="@+id/etTag"
                 android:inputType="text"
-                android:autofillHints=""
+                android:importantForAutofill="no"
                 tools:text="OT" />
         </TableRow>
 
@@ -110,6 +111,7 @@
         </TableRow>
 
         <TableRow
+            android:layout_marginTop="@dimen/lbl_def_margin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/lbl_def_margin"

@@ -1,3 +1,4 @@
+/*
 package net.oddware.alcolator
 
 import android.os.Bundle
@@ -7,12 +8,22 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.sortabletableview.recyclerview.model.TableColumnWeightModel
 import com.sortabletableview.recyclerview.toolkit.SimpleTableHeaderAdapter
 import kotlinx.android.synthetic.main.fragment_drink_list.*
 import kotlinx.android.synthetic.main.fragment_drink_list.view.*
 import timber.log.Timber
 
 class DrinkListFragment : Fragment() {
+    companion object {
+        class NameComparator : Comparator<Drink> {
+            override fun compare(d0: Drink?, d1: Drink?): Int {
+                return d0?.name!!.compareTo(d1!!.name)
+            }
+
+        }
+    }
+
     private lateinit var drinkViewModel: DrinkViewModel
 
     override fun onCreateView(
@@ -27,17 +38,16 @@ class DrinkListFragment : Fragment() {
             view.context,
             *tblHdrs // use kotlin spread operator: *
         )
-        //val tblColWeightModel = TableColumnWeightModel(tblHdrs.size)
-        //with(tblColWeightModel) {
-        //    setColumnWeight(0, 1) // tag
-        //    setColumnWeight(1, 2) // name
-        //    setColumnWeight(2, 2) // volume
-        //    setColumnWeight(3, 2) // water
-        //    setColumnWeight(4, 2) // alcohol
-        //    setColumnWeight(5, 2) // price per ml drink
-        //    setColumnWeight(6, 2) // price per ml alcohol
-        //}
-        //view.tblDrinks.columnModel = tblColWeightModel
+        val tblColWeightModel = TableColumnWeightModel(tblHdrs.size)
+        with(tblColWeightModel) {
+            setColumnWeight(0, 2) // name
+            setColumnWeight(1, 1) // volume
+            setColumnWeight(2, 1) // price
+            setColumnWeight(3, 1) // percentage
+            setColumnWeight(4, 1) // ml alcohol
+            setColumnWeight(5, 1) // price per ml alcohol
+        }
+        view.tblDrinks.columnModel = tblColWeightModel
 
         view.tblDrinks.addDataClickListener { rowIndex, data ->
             Timber.d("rowIndex: $rowIndex, drink: $data")
@@ -52,6 +62,8 @@ class DrinkListFragment : Fragment() {
                 )
             }
         }
+
+        view.tblDrinks.setColumnComparator(0, NameComparator())
 
         view.fabAddDrink.setOnClickListener {
             context?.let {
@@ -98,3 +110,4 @@ class DrinkListFragment : Fragment() {
         })
     }
 }
+*/

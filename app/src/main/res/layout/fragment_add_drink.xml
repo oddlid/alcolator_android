@@ -5,130 +5,136 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <TableLayout
-        android:layout_marginTop="@dimen/lbl_def_margin"
-        android:id="@+id/tblAlcForm"
-        android:layout_width="match_parent"
+    <HorizontalScrollView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:stretchColumns="1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_gravity="center_horizontal">
 
-        <TableRow
+        <TableLayout
+            android:id="@+id/tblAlcForm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/lbl_def_margin"
-            android:layout_marginEnd="@dimen/lbl_def_margin">
-
-            <TextView
-                android:id="@+id/txtTag"
-                android:layout_marginEnd="@dimen/lbl_def_margin"
-                android:text="@string/frmAdd_lblTagTxt"
-                android:labelFor="@id/etTag"
-                tools:text="Pub/Tag:" />
-
-            <EditText
-                android:id="@+id/etTag"
-                android:inputType="text"
-                android:importantForAutofill="no"
-                tools:text="OT" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/lbl_def_margin"
-            android:layout_marginEnd="@dimen/lbl_def_margin">
-
-            <TextView
-                android:layout_marginEnd="@dimen/lbl_def_margin"
-                android:text="@string/frmAdd_lblNameTxt"
-                android:labelFor="@id/etName"
-                tools:text="Drink name:" />
-
-            <EditText
-                android:id="@+id/etName"
-                android:inputType="text"
-                tools:text="Sitting Bulldog"
-                android:importantForAutofill="no" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/lbl_def_margin"
-            android:layout_marginEnd="@dimen/lbl_def_margin">
-
-            <TextView
-                android:layout_marginEnd="@dimen/lbl_def_margin"
-                android:text="@string/frmAdd_lblVolTxt"
-                android:labelFor="@id/etVol"
-                tools:text="Drink volume (ml):" />
-
-            <EditText
-                android:id="@+id/etVol"
-                android:inputType="number"
-                tools:text="500"
-                android:importantForAutofill="no" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/lbl_def_margin"
-            android:layout_marginEnd="@dimen/lbl_def_margin">
-
-            <TextView
-                android:layout_marginEnd="@dimen/lbl_def_margin"
-                android:text="@string/frmAdd_lblPctTxt"
-                android:labelFor="@id/etPct"
-                tools:text="Drink percentage:" />
-
-            <EditText
-                android:id="@+id/etPct"
-                android:inputType="numberDecimal"
-                tools:text="6,4"
-                android:importantForAutofill="no" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/lbl_def_margin"
-            android:layout_marginEnd="@dimen/lbl_def_margin">
-
-            <TextView
-                android:layout_marginEnd="@dimen/lbl_def_margin"
-                android:text="@string/frmAdd_lblPriceTxt"
-                android:labelFor="@id/etPrice"
-                tools:text="Drink price:" />
-
-            <EditText
-                android:id="@+id/etPrice"
-                android:inputType="numberDecimal"
-                tools:text="69.5"
-                android:importantForAutofill="no" />
-        </TableRow>
-
-        <TableRow
             android:layout_marginTop="@dimen/lbl_def_margin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/lbl_def_margin"
-            android:layout_marginEnd="@dimen/lbl_def_margin">
+            android:stretchColumns="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <Button
-                android:id="@+id/btnCancel"
-                android:text="@string/frmAdd_btnCancelTxt"
-                tools:text="Cancel" />
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/lbl_def_margin"
+                android:layout_marginEnd="@dimen/lbl_def_margin">
 
-            <Button
-                android:id="@+id/btnSave"
-                android:text="@string/frmAdd_btnAddTxt"
-                tools:text="Add" />
-        </TableRow>
+                <TextView
+                    android:id="@+id/txtTag"
+                    android:layout_marginEnd="@dimen/lbl_def_margin"
+                    android:labelFor="@id/etTag"
+                    android:text="@string/frmAdd_lblTagTxt"
+                    tools:text="Pub/Tag:" />
 
-    </TableLayout>
+                <EditText
+                    android:id="@+id/etTag"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    tools:text="OT" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/lbl_def_margin"
+                android:layout_marginEnd="@dimen/lbl_def_margin">
+
+                <TextView
+                    android:layout_marginEnd="@dimen/lbl_def_margin"
+                    android:labelFor="@id/etName"
+                    android:text="@string/frmAdd_lblNameTxt"
+                    tools:text="Drink name:" />
+
+                <EditText
+                    android:id="@+id/etName"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    tools:text="Sitting Bulldog" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/lbl_def_margin"
+                android:layout_marginEnd="@dimen/lbl_def_margin">
+
+                <TextView
+                    android:layout_marginEnd="@dimen/lbl_def_margin"
+                    android:labelFor="@id/etVol"
+                    android:text="@string/frmAdd_lblVolTxt"
+                    tools:text="Drink volume (ml):" />
+
+                <EditText
+                    android:id="@+id/etVol"
+                    android:importantForAutofill="no"
+                    android:inputType="number"
+                    tools:text="500" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/lbl_def_margin"
+                android:layout_marginEnd="@dimen/lbl_def_margin">
+
+                <TextView
+                    android:layout_marginEnd="@dimen/lbl_def_margin"
+                    android:labelFor="@id/etPct"
+                    android:text="@string/frmAdd_lblPctTxt"
+                    tools:text="Drink percentage:" />
+
+                <EditText
+                    android:id="@+id/etPct"
+                    android:importantForAutofill="no"
+                    android:inputType="numberDecimal"
+                    tools:text="6,4" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/lbl_def_margin"
+                android:layout_marginEnd="@dimen/lbl_def_margin">
+
+                <TextView
+                    android:layout_marginEnd="@dimen/lbl_def_margin"
+                    android:labelFor="@id/etPrice"
+                    android:text="@string/frmAdd_lblPriceTxt"
+                    tools:text="Drink price:" />
+
+                <EditText
+                    android:id="@+id/etPrice"
+                    android:importantForAutofill="no"
+                    android:inputType="numberDecimal"
+                    tools:text="69.5" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/lbl_def_margin"
+                android:layout_marginTop="@dimen/lbl_def_margin"
+                android:layout_marginEnd="@dimen/lbl_def_margin">
+
+                <Button
+                    android:id="@+id/btnCancel"
+                    android:text="@string/frmAdd_btnCancelTxt"
+                    tools:text="Cancel" />
+
+                <Button
+                    android:id="@+id/btnSave"
+                    android:text="@string/frmAdd_btnAddTxt"
+                    tools:text="Add" />
+            </TableRow>
+
+        </TableLayout>
+    </HorizontalScrollView>
 
     <!--
     <de.codecrafters.tableview.SortableTableView

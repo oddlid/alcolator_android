@@ -18,6 +18,33 @@ class DrinkDetailFragment(private val drinkID: Int = DrinkDetailActivity.INVALID
     Fragment(),
     DeleteOneDialog.DeleteOneDialogListener {
 
+    //companion object {
+    //    // This didn't work at all
+    //    fun getBorders(
+    //        bgColor: Int,
+    //        borderColor: Int,
+    //        left: Int,
+    //        top: Int,
+    //        right: Int,
+    //        bottom: Int
+    //    ): LayerDrawable {
+    //        val borderColorDrawable = ColorDrawable(borderColor)
+    //        val bgColorDrawable = ColorDrawable(bgColor)
+    //        val drawables = arrayOf(borderColorDrawable, bgColorDrawable)
+    //        val layerDrawable = LayerDrawable(drawables)
+
+    //        layerDrawable.setLayerInset(
+    //            1, // Index of the drawable to adjust [background color layer]
+    //            left,     // Number of pixels to add to the left bound [left border]
+    //            top,      // Number of pixels to add to the top bound [top border]
+    //            right,    // Number of pixels to add to the right bound [right border]
+    //            bottom    // Number of pixels to add to the bottom bound [bottom border]
+    //        )
+
+    //        return layerDrawable
+    //    }
+    //}
+
     private var drinkObj: Drink? = null
     private lateinit var drinkViewModel: DrinkViewModel
 
@@ -64,6 +91,16 @@ class DrinkDetailFragment(private val drinkID: Int = DrinkDetailActivity.INVALID
                     //activity?.finish()
                 }
             }
+
+            // Didn't work at all
+            //view.detailRow0.background = getBorders(
+            //    Color.TRANSPARENT,
+            //    Color.RED,
+            //    0,
+            //    0,
+            //    0,
+            //    2
+            //)
         }
 
         Timber.d("DrinkDetailFragment created")

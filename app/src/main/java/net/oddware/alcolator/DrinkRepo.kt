@@ -33,6 +33,11 @@ class DrinkRepo(private val drinkDao: DrinkDao) {
         drinkDao.insert(drink)
     }
 
+    suspend fun import(drinks: List<Drink>) {
+        Timber.d("Importing list of drinks to database")
+        drinkDao.importDrinks(drinks)
+    }
+
     suspend fun clear() {
         Timber.d("Deleting all drinks from database")
         drinkDao.deleteAll()

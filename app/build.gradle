@@ -45,6 +45,7 @@ dependencies {
 
     // optional - Kotlin Extensions and Coroutines support for Room
     implementation "androidx.room:room-ktx:$rootProject.v_room"
+    //kapt "androidx.room:room-ktx:$rootProject.v_room"
     // optional - RxJava support for Room
     //implementation "androidx.room:room-rxjava2:$rootProject.v_room"
     // optional - Guava support for Room, including Optional and ListenableFuture

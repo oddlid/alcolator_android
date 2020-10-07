@@ -11,6 +11,9 @@ interface DrinkDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(drink: Drink)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun importDrinks(drinks: List<Drink>)
+
     @Query("DELETE FROM drinks")
     suspend fun deleteAll()
 

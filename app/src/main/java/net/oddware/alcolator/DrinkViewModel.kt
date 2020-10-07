@@ -16,6 +16,10 @@ class DrinkViewModel(application: Application) : AndroidViewModel(application) {
         drinkRepo.add(drink)
     }
 
+    fun import(drinkList: List<Drink>) = viewModelScope.launch(Dispatchers.IO) {
+        drinkRepo.import(drinkList)
+    }
+
     fun clear() = viewModelScope.launch(Dispatchers.IO) {
         drinkRepo.clear()
     }

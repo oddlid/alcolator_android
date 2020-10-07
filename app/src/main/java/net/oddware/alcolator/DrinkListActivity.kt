@@ -1,18 +1,127 @@
 package net.oddware.alcolator
 
+import android.app.Activity
+import android.content.ContentResolver
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.snackbar.Snackbar
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.google.gson.reflect.TypeToken
 import timber.log.Timber
+import java.io.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 class DrinkListActivity :
     AppCompatActivity(),
     DeleteAllDialog.DeleteAllDialogListener {
 
+    companion object {
+        const val REQ_CREATE_FILE = 1
+        const val REQ_OPEN_FILE = 2
+        const val MIME_TYPE = "application/json"
+
+        @JvmStatic
+        fun getCurrentDateISO8601String(): String {
+            return SimpleDateFormat("yyyy-MM-dd").format(Date())
+        }
+
+        @JvmStatic
+        var gson: Gson? = null
+            @Synchronized
+            get() {
+                if (null == field) {
+                    field = GsonBuilder()
+                        .excludeFieldsWithoutExposeAnnotation()
+                        .setPrettyPrinting()
+                        .create()
+                }
+                return field
+            }
+            private set
+    }
+
     private lateinit var drinkViewModel: DrinkViewModel
+    private lateinit var cResolver: ContentResolver
+
+    private fun createFile() {
+        val intent = Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
+            addCategory(Intent.CATEGORY_OPENABLE)
+            type = MIME_TYPE
+            putExtra(
+                Intent.EXTRA_TITLE,
+                String.format("%s_alcolator_data.json", getCurrentDateISO8601String())
+            )
+        }
+        startActivityForResult(intent, REQ_CREATE_FILE)
+    }
+
+    private fun openFile() {
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+            addCategory(Intent.CATEGORY_OPENABLE)
+            type = MIME_TYPE
+        }
+        startActivityForResult(intent, REQ_OPEN_FILE)
+    }
+
+    @Throws(IOException::class)
+    private fun writeBackup(uri: Uri): Boolean {
+        val drinks = drinkViewModel.drinks.value ?: return false
+        val jsonData = gson?.toJson(drinks) ?: return false
+        cResolver.openOutputStream(uri)?.use { os ->
+            BufferedWriter(OutputStreamWriter(os)).use { writer ->
+                writer.write(jsonData)
+            }
+        }
+        return true
+    }
+
+    @Throws(IOException::class)
+    private fun readBackup(uri: Uri): String {
+        val sb = StringBuilder()
+        cResolver.openInputStream(uri)?.use { ips ->
+            BufferedReader(InputStreamReader(ips)).use { reader ->
+                var line: String? = reader.readLine()
+                while (null != line) {
+                    sb.append(line)
+                    line = reader.readLine()
+                }
+            }
+        }
+        return sb.toString()
+    }
+
+    private fun restoreBackup(uri: Uri): Boolean {
+        val jsonData = readBackup(uri)
+        if (jsonData.isEmpty()) {
+            Timber.d("Got empty string from readBackup(), quitting")
+            return false
+        }
+        val typeToken = object : TypeToken<List<Drink>>() {}.type
+        val drinkList = gson?.fromJson<List<Drink>>(jsonData, typeToken)
+        if (null == drinkList || drinkList.isEmpty()) {
+            Timber.e("Error parsing JSON to list of Drink. List is null or empty.")
+            return false
+        }
+        drinkViewModel.clear()
+        drinkViewModel.import(drinkList)
+        return true
+    }
+
+    fun showMessage(msg: String) {
+        Snackbar.make(
+            findViewById(R.id.flDrinkList),
+            msg,
+            Snackbar.LENGTH_LONG
+        ).show()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +133,7 @@ class DrinkListActivity :
         }
 
         drinkViewModel = ViewModelProvider(this).get(DrinkViewModel::class.java)
+        cResolver = applicationContext.contentResolver
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -46,8 +156,45 @@ class DrinkListActivity :
                     }
                 }
             }
+            R.id.action_backup -> {
+                createFile()
+            }
+            R.id.action_backup_restore -> {
+                openFile()
+            }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (Activity.RESULT_OK == resultCode) {
+            when (requestCode) {
+                REQ_CREATE_FILE -> {
+                    //Timber.d("Create file: $data")
+                    data?.data?.also { uri ->
+                        //Timber.d("Uri: $uri")
+                        if (writeBackup(uri)) {
+                            showMessage("Success writing backup :)")
+                        } else {
+                            showMessage("Error writing backup :'(")
+                        }
+                    }
+                }
+                REQ_OPEN_FILE -> {
+                    Timber.d("Open file: $data")
+                    data?.data?.also { uri ->
+                        Timber.d("Uri: $uri")
+                        if (restoreBackup(uri)) {
+                            showMessage("Success restoring from backup")
+                        } else {
+                            showMessage("Error restoring from backup")
+                        }
+                    }
+                }
+            }
+        }
     }
 
     override fun onPositiveClick(df: DialogFragment) {

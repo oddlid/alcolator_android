@@ -27,6 +27,8 @@
     <string name="dlgDelOne_btnOkTxt">Delete</string>
     <string name="dlgDelOne_btnCancelTxt">Cancel</string>
     <string name="menu_delAllTxt">Delete all drinks</string>
+    <string name="menu_backupTxt">Export backup</string>
+    <string name="menu_restoreTxt">Import backup</string>
     <string name="act_DrinkDetailsTitle">Drink details</string>
 
     <string-array name="colHdrs">

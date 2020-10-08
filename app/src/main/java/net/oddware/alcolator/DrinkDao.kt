@@ -8,6 +8,9 @@ interface DrinkDao {
     @Query("SELECT * from drinks")
     fun getDrinks(): LiveData<List<Drink>>
 
+    @Query("SELECT tag FROM drinks")
+    fun getTags(): LiveData<List<String>>
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(drink: Drink)
 
@@ -25,4 +28,5 @@ interface DrinkDao {
 
     @Query("SELECT * FROM drinks WHERE id == :id")
     suspend fun get(id: Int): Drink
+
 }

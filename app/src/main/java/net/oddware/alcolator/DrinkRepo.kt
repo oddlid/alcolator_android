@@ -23,6 +23,7 @@ class DrinkRepo(private val drinkDao: DrinkDao) {
     }
 
     val drinks = drinkDao.getDrinks()
+    val tags = drinkDao.getTags()
 
     private inline fun LiveData<List<Drink>>.get(index: Int): Drink? {
         return value?.get(index)

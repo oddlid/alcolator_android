@@ -11,6 +11,7 @@ import kotlinx.coroutines.launch
 class DrinkViewModel(application: Application) : AndroidViewModel(application) {
     private val drinkRepo: DrinkRepo = DrinkRepo.getInstance(application)
     val drinks = drinkRepo.drinks
+    val tags = drinkRepo.tags
 
     fun add(drink: Drink) = viewModelScope.launch(Dispatchers.IO) {
         drinkRepo.add(drink)

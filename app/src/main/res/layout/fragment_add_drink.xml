@@ -8,16 +8,17 @@
     <HorizontalScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal">
+        android:layout_gravity="center_horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TableLayout
             android:id="@+id/tblAlcForm"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/lbl_def_margin"
-            android:stretchColumns="1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_marginEnd="32dp"
+            android:stretchColumns="1">
 
             <TableRow
                 android:layout_width="match_parent"
@@ -93,7 +94,7 @@
                     android:id="@+id/etPct"
                     android:importantForAutofill="no"
                     android:inputType="numberDecimal"
-                    tools:text="6,4" />
+                    tools:text="6.4" />
             </TableRow>
 
             <TableRow
@@ -130,7 +131,7 @@
                 <Button
                     android:id="@+id/btnSave"
                     android:text="@string/frmAdd_btnAddTxt"
-                    tools:text="Add" />
+                    tools:text="Save" />
             </TableRow>
 
         </TableLayout>

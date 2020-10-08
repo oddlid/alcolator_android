@@ -8,7 +8,7 @@ interface DrinkDao {
     @Query("SELECT * from drinks")
     fun getDrinks(): LiveData<List<Drink>>
 
-    @Query("SELECT tag FROM drinks")
+    @Query("SELECT DISTINCT tag FROM drinks")
     fun getTags(): LiveData<List<String>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)

@@ -5,11 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.sortabletableview.recyclerview.SortableTableView
-        android:id="@+id/tblDrinks"
+    <!--
+    <HorizontalScrollView
+        android:id="@+id/hsvDrinks"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        table:tableView_columnCount="6" />
+        android:layout_height="wrap_content">
+    </HorizontalScrollView>
+    -->
+
+    <HorizontalScrollView
+        android:id="@+id/hsvDrinks"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.sortabletableview.recyclerview.SortableTableView
+            android:id="@+id/tblDrinks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            table:tableView_columnCount="6" />
+    </HorizontalScrollView>
 
     <LinearLayout
         android:layout_width="wrap_content"

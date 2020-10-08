@@ -33,10 +33,10 @@
 
     <string-array name="colHdrs">
         <item>Name</item>
-        <item>ML</item>
-        <item>#</item>
-        <item>%</item>
-        <item>Alc</item>
-        <item># Alc</item>
+        <item>Vol (ml)</item>
+        <item>Price</item>
+        <item>Percent</item>
+        <item>Alc (ml)</item>
+        <item>ML price alc</item>
     </string-array>
 </resources>

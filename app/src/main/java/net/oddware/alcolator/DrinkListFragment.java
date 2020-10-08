@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.HorizontalScrollView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,8 +14,11 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.sortabletableview.recyclerview.SortableTableView;
 import com.sortabletableview.recyclerview.listeners.TableDataClickListener;
-import com.sortabletableview.recyclerview.model.TableColumnWeightModel;
+import com.sortabletableview.recyclerview.model.TableColumnDpWidthModel;
+import com.sortabletableview.recyclerview.toolkit.FilterHelper;
 import com.sortabletableview.recyclerview.toolkit.SimpleTableHeaderAdapter;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Comparator;
 import java.util.List;
@@ -30,27 +34,36 @@ I get "expected Nothing, got xxx".
 O I try to write this class in Java, because I'm tired of googling and not finding any
 good answers.
  */
-public class DrinkListFragment extends Fragment {
+public class DrinkListFragment extends Fragment implements TagListFragment.TagSelectionListener {
     private SortableTableView<Drink> mTblDrinks;
+    private TagListFragment mTagListFrag;
+    private FilterHelper<Drink> mFilterHelper;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_drink_list, container, false);
         mTblDrinks = view.findViewById(R.id.tblDrinks);
+        mFilterHelper = new FilterHelper<>(mTblDrinks);
         String[] tblHdrs = getResources().getStringArray(R.array.colHdrs);
 
         mTblDrinks.setColumnCount(tblHdrs.length);
         mTblDrinks.setHeaderAdapter(new SimpleTableHeaderAdapter(view.getContext(), tblHdrs));
 
-        TableColumnWeightModel tcwm = new TableColumnWeightModel(tblHdrs.length);
-        tcwm.setColumnWeight(0, 2); // name
-        tcwm.setColumnWeight(1, 1); // volume
-        tcwm.setColumnWeight(2, 1); // price
-        tcwm.setColumnWeight(3, 1); // percentage
-        tcwm.setColumnWeight(4, 1); // ml alcohol
-        tcwm.setColumnWeight(5, 1); // price per ml alcohol
-        mTblDrinks.setColumnModel(tcwm);
+
+        //TableColumnWeightModel tcwm = new TableColumnWeightModel(tblHdrs.length);
+        //tcwm.setColumnWeight(0, 2); // name
+        //tcwm.setColumnWeight(1, 1); // volume
+        //tcwm.setColumnWeight(2, 1); // price
+        //tcwm.setColumnWeight(3, 1); // percentage
+        //tcwm.setColumnWeight(4, 1); // ml alcohol
+        //tcwm.setColumnWeight(5, 1); // price per ml alcohol
+        //mTblDrinks.setColumnModel(tcwm);
+
+        mTblDrinks.registerHorizontalScrollView((HorizontalScrollView) view.findViewById(R.id.hsvDrinks));
+        TableColumnDpWidthModel tcdpwm = new TableColumnDpWidthModel(getContext(), 6, 96);
+        tcdpwm.setColumnWidth(0, 192);
+        mTblDrinks.setColumnModel(tcdpwm);
 
         mTblDrinks.setColumnComparator(0, new NameComparator());
         mTblDrinks.setColumnComparator(1, new VolumeComparator());
@@ -86,6 +99,16 @@ public class DrinkListFragment extends Fragment {
             }
         });
 
+        view.findViewById(R.id.fabFilter).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (null == mTagListFrag) {
+                    mTagListFrag = new TagListFragment(DrinkListFragment.this);
+                }
+                mTagListFrag.show(getParentFragmentManager(), "TagListFragment");
+            }
+        });
+
         return view;
     }
 
@@ -112,6 +135,34 @@ public class DrinkListFragment extends Fragment {
             return 0;
         }
         return dta.getItemCount();
+    }
+
+    @Override
+    public void onSelectTag(@NotNull String tag) {
+        Timber.d("Selected tag: %s", tag);
+        if (null != mTagListFrag) {
+            mTagListFrag.dismiss();
+            mFilterHelper.setFilter(new TagFilter(tag));
+        } else {
+            Timber.d("tagListFrag is null");
+        }
+    }
+
+    @Override
+    public void onCancelTag() {
+        Timber.d("Tag selection cancelled");
+        if (null != mTagListFrag) {
+            mTagListFrag.dismiss();
+        }
+    }
+
+    @Override
+    public void onResetTag() {
+        Timber.d("Tag selection reset");
+        if (null != mTagListFrag) {
+            mTagListFrag.dismiss();
+            mFilterHelper.clearFilter();
+        }
     }
 
     private static class NameComparator implements Comparator<Drink> {
@@ -160,6 +211,24 @@ public class DrinkListFragment extends Fragment {
         @Override
         public int compare(Drink d1, Drink d2) {
             return Double.compare(d1.pricePerAlcML(), d2.pricePerAlcML());
+        }
+    }
+
+    private final class TagFilter implements FilterHelper.Filter<Drink> {
+        private final String query;
+
+        TagFilter(final String query) {
+            this.query = query;
+        }
+
+        @Override
+        public boolean apply(@NotNull final Drink data) {
+            Timber.d("Tag: %s", data.getTag());
+            String lcTag = data.getTag().toLowerCase();
+            String lcQuery = query.toLowerCase();
+            boolean has = lcTag.contains(lcQuery);
+            Timber.d("Tag contains %s: %b", lcQuery, has);
+            return has;
         }
     }
 }

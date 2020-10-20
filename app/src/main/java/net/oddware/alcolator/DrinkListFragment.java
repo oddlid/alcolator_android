@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.HorizontalScrollView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,7 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.sortabletableview.recyclerview.SortableTableView;
 import com.sortabletableview.recyclerview.listeners.TableDataClickListener;
-import com.sortabletableview.recyclerview.model.TableColumnDpWidthModel;
+import com.sortabletableview.recyclerview.model.TableColumnWeightModel;
 import com.sortabletableview.recyclerview.toolkit.FilterHelper;
 import com.sortabletableview.recyclerview.toolkit.SimpleTableHeaderAdapter;
 
@@ -51,19 +50,19 @@ public class DrinkListFragment extends Fragment implements TagListFragment.TagSe
         mTblDrinks.setHeaderAdapter(new SimpleTableHeaderAdapter(view.getContext(), tblHdrs));
 
 
-        //TableColumnWeightModel tcwm = new TableColumnWeightModel(tblHdrs.length);
-        //tcwm.setColumnWeight(0, 2); // name
-        //tcwm.setColumnWeight(1, 1); // volume
-        //tcwm.setColumnWeight(2, 1); // price
-        //tcwm.setColumnWeight(3, 1); // percentage
-        //tcwm.setColumnWeight(4, 1); // ml alcohol
-        //tcwm.setColumnWeight(5, 1); // price per ml alcohol
-        //mTblDrinks.setColumnModel(tcwm);
+        TableColumnWeightModel tcwm = new TableColumnWeightModel(tblHdrs.length);
+        tcwm.setColumnWeight(0, 2); // name
+        tcwm.setColumnWeight(1, 1); // volume
+        tcwm.setColumnWeight(2, 1); // price
+        tcwm.setColumnWeight(3, 1); // percentage
+        tcwm.setColumnWeight(4, 1); // ml alcohol
+        tcwm.setColumnWeight(5, 1); // price per ml alcohol
+        mTblDrinks.setColumnModel(tcwm);
 
-        mTblDrinks.registerHorizontalScrollView((HorizontalScrollView) view.findViewById(R.id.hsvDrinks));
-        TableColumnDpWidthModel tcdpwm = new TableColumnDpWidthModel(getContext(), 6, 96);
-        tcdpwm.setColumnWidth(0, 192);
-        mTblDrinks.setColumnModel(tcdpwm);
+        //mTblDrinks.registerHorizontalScrollView((HorizontalScrollView) view.findViewById(R.id.hsvDrinks));
+        //TableColumnDpWidthModel tcdpwm = new TableColumnDpWidthModel(getContext(), 6, 96);
+        //tcdpwm.setColumnWidth(0, 192);
+        //mTblDrinks.setColumnModel(tcdpwm);
 
         mTblDrinks.setColumnComparator(0, new NameComparator());
         mTblDrinks.setColumnComparator(1, new VolumeComparator());

@@ -35,7 +35,7 @@
         <item>Name</item>
         <item>Vol (ml)</item>
         <item>Price</item>
-        <item>Percent</item>
+        <item>%</item>
         <item>Alc (ml)</item>
         <item>ML price alc</item>
     </string-array>

@@ -25,7 +25,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$rootProject.v_kotlinStdLib"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$rootProject.v_kotlinStdLib"
     implementation "androidx.appcompat:appcompat:$rootProject.v_appCompat"
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:$rootProject.v_swipeRefreshLayout"
     implementation "androidx.core:core-ktx:$rootProject.v_coreCtx"
@@ -34,7 +34,7 @@ dependencies {
     //implementation "com.github.ISchwarz23:SortableTableView:v$rootProject.v_sortableTableView"
     implementation "com.sortabletableview.recyclerview:sortabletableview:$rootProject.v_sortableTableView"
     implementation "com.google.code.gson:gson:$rootProject.v_gson"
-    testImplementation 'junit:junit:4.13'
+    testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation "androidx.constraintlayout:constraintlayout:$rootProject.v_constraintLayout"
@@ -55,7 +55,7 @@ dependencies {
 
     // Lifecycle components
     implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.v_archLifeCycle"
-    kapt "androidx.lifecycle:lifecycle-compiler:$rootProject.v_archLifeCycle"
+    //kapt "androidx.lifecycle:lifecycle-compiler:$rootProject.v_archLifeCycle"
     implementation "android.arch.lifecycle:common-java8:$rootProject.v_lifeCycle_CommonJ8" // recommended over the above
     androidTestImplementation "androidx.arch.core:core-testing:$rootProject.v_androidxArch"
 

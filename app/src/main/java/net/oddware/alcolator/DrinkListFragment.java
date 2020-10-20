@@ -31,7 +31,7 @@ Since the SortableTableView lib is written in Java, there are some incompatabili
 with Kotlin, especially for methods that accept a Comparator<T>, DataClickListener<T>
 and probably other stuff with generics. When I try to pass instances of my subclasses,
 I get "expected Nothing, got xxx".
-O I try to write this class in Java, because I'm tired of googling and not finding any
+So I try to write this class in Java, because I'm tired of googling and not finding any
 good answers.
  */
 public class DrinkListFragment extends Fragment implements TagListFragment.TagSelectionListener {
@@ -44,7 +44,7 @@ public class DrinkListFragment extends Fragment implements TagListFragment.TagSe
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_drink_list, container, false);
         mTblDrinks = view.findViewById(R.id.tblDrinks);
-        mFilterHelper = new FilterHelper<>(mTblDrinks);
+        //mFilterHelper = new FilterHelper<>(mTblDrinks); // creating it here lead to filtering not working
         String[] tblHdrs = getResources().getStringArray(R.array.colHdrs);
 
         mTblDrinks.setColumnCount(tblHdrs.length);
@@ -142,6 +142,10 @@ public class DrinkListFragment extends Fragment implements TagListFragment.TagSe
         Timber.d("Selected tag: %s", tag);
         if (null != mTagListFrag) {
             mTagListFrag.dismiss();
+            // creating the filterhelper here on demand, was key to making it work
+            if (null == mFilterHelper) {
+                mFilterHelper = new FilterHelper<>(mTblDrinks);
+            }
             mFilterHelper.setFilter(new TagFilter(tag));
         } else {
             Timber.d("tagListFrag is null");
@@ -161,7 +165,9 @@ public class DrinkListFragment extends Fragment implements TagListFragment.TagSe
         Timber.d("Tag selection reset");
         if (null != mTagListFrag) {
             mTagListFrag.dismiss();
-            mFilterHelper.clearFilter();
+            if (null != mFilterHelper) {
+                mFilterHelper.clearFilter();
+            }
         }
     }
 
@@ -224,8 +230,8 @@ public class DrinkListFragment extends Fragment implements TagListFragment.TagSe
         @Override
         public boolean apply(@NotNull final Drink data) {
             Timber.d("Tag: %s", data.getTag());
-            String lcTag = data.getTag().toLowerCase();
-            String lcQuery = query.toLowerCase();
+            final String lcTag = data.getTag().toLowerCase();
+            final String lcQuery = query.toLowerCase();
             boolean has = lcTag.contains(lcQuery);
             Timber.d("Tag contains %s: %b", lcQuery, has);
             return has;

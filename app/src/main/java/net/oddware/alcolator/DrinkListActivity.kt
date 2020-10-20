@@ -11,9 +11,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
-import com.google.gson.reflect.TypeToken
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import timber.log.Timber
 import java.io.*
 import java.text.SimpleDateFormat
@@ -30,22 +30,11 @@ class DrinkListActivity :
 
         @JvmStatic
         fun getCurrentDateISO8601String(): String {
-            return SimpleDateFormat("yyyy-MM-dd").format(Date())
+            return SimpleDateFormat("yyyy-MM-dd", Locale.US).format(Date())
         }
 
         @JvmStatic
-        var gson: Gson? = null
-            @Synchronized
-            get() {
-                if (null == field) {
-                    field = GsonBuilder()
-                        .excludeFieldsWithoutExposeAnnotation()
-                        .setPrettyPrinting()
-                        .create()
-                }
-                return field
-            }
-            private set
+        val json = Json { prettyPrint = true }
     }
 
     private lateinit var drinkViewModel: DrinkViewModel
@@ -74,12 +63,13 @@ class DrinkListActivity :
     @Throws(IOException::class)
     private fun writeBackup(uri: Uri): Boolean {
         val drinks = drinkViewModel.drinks.value ?: return false
-        val jsonData = gson?.toJson(drinks) ?: return false
+        val jsonData = json.encodeToString(drinks)
         cResolver.openOutputStream(uri)?.use { os ->
             BufferedWriter(OutputStreamWriter(os)).use { writer ->
                 writer.write(jsonData)
             }
         }
+
         return true
     }
 
@@ -104,14 +94,15 @@ class DrinkListActivity :
             Timber.d("Got empty string from readBackup(), quitting")
             return false
         }
-        val typeToken = object : TypeToken<List<Drink>>() {}.type
-        val drinkList = gson?.fromJson<List<Drink>>(jsonData, typeToken)
-        if (null == drinkList || drinkList.isEmpty()) {
-            Timber.e("Error parsing JSON to list of Drink. List is null or empty.")
+
+        val drinkList = json.decodeFromString<List<Drink>>(jsonData)
+        if (drinkList.isEmpty()) {
+            Timber.e("Error parsing JSON to list of Drink. List is empty.")
             return false
         }
         drinkViewModel.clear()
         drinkViewModel.import(drinkList)
+
         return true
     }
 

@@ -35,7 +35,7 @@ dependencies {
     //implementation "com.github.ISchwarz23:SortableTableView:v$rootProject.v_sortableTableView"
     implementation "com.sortabletableview.recyclerview:sortabletableview:$rootProject.v_sortableTableView"
 
-    implementation "com.google.code.gson:gson:$rootProject.v_gson"
+    //implementation "com.google.code.gson:gson:$rootProject.v_gson"
     // switching over from gson to kotlinx serialization json
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:$rootProject.v_kxsJson"
 

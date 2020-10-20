@@ -3,38 +3,32 @@ package net.oddware.alcolator
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.google.gson.annotations.Expose
-import com.google.gson.annotations.SerializedName
-import java.io.Serializable
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 @Entity(tableName = "drinks")
+@Serializable
 data class Drink(
-    @Expose
-    @SerializedName("id")
+    @SerialName("id")
     @ColumnInfo(name = "id")
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0,
-    @Expose
-    @SerializedName("tag")
+    @SerialName("tag")
     @ColumnInfo(name = "tag")
     var tag: String = "",
-    @Expose
-    @SerializedName("name")
+    @SerialName("name")
     @ColumnInfo(name = "name")
     var name: String = "",
-    @Expose
-    @SerializedName("volume")
+    @SerialName("volume")
     @ColumnInfo(name = "volume")
     var volumeML: Int = 0,
-    @Expose
-    @SerializedName("percentage")
+    @SerialName("percentage")
     @ColumnInfo(name = "percentage")
     var alcPct: Double = 0.0,
-    @Expose
-    @SerializedName("price")
+    @SerialName("price")
     @ColumnInfo(name = "price")
     var price: Double = 0.0
-) : Serializable, Comparable<Drink> {
+) : Comparable<Drink> {
     fun volumeAsDL(): Double = volumeML / 100.0
 
     fun volumeAsL(): Double = volumeML / 1000.0

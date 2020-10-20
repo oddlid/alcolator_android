@@ -37,6 +37,7 @@
             android:backgroundTint="@android:color/transparent"
             android:clickable="true"
             android:focusable="true"
+            android:contentDescription=""
             android:src="@drawable/ic_filter_list" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -48,6 +49,7 @@
             android:backgroundTint="@android:color/transparent"
             android:clickable="true"
             android:focusable="true"
+            android:contentDescription="TODO"
             app:srcCompat="@android:drawable/ic_input_add" />
     </LinearLayout>
 

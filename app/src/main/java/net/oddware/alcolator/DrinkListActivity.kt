@@ -106,7 +106,7 @@ class DrinkListActivity :
         return true
     }
 
-    fun showMessage(msg: String) {
+    private fun showMessage(msg: String) {
         Snackbar.make(
             findViewById(R.id.flDrinkList),
             msg,

@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_tag_list.*
@@ -52,7 +51,7 @@ class TagListFragment(private val listener: TagSelectionListener) : DialogFragme
 
         drinkViewModel = ViewModelProvider(this).get(DrinkViewModel::class.java)
 
-        drinkViewModel.tags.observe(viewLifecycleOwner, Observer {
+        drinkViewModel.tags.observe(viewLifecycleOwner, {
             if (null != it) {
                 rvTagList.adapter = TagListAdapter(it, listener)
             }

@@ -12,7 +12,7 @@ class DeleteAllDialog : DialogFragment() {
         fun onNegativeClick(df: DialogFragment)
     }
 
-    var listener: DeleteAllDialogListener? = null
+    private var listener: DeleteAllDialogListener? = null
 
     // This should be used when instantiated from an Activity
     override fun onAttach(context: Context) {

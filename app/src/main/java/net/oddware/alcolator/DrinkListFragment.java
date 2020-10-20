@@ -21,6 +21,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 import timber.log.Timber;
 
@@ -76,7 +77,7 @@ public class DrinkListFragment extends Fragment implements TagListFragment.TagSe
             public void onDataClicked(int rowIndex, Drink drink) {
                 startActivityForResult(
                         DrinkDetailActivity.getLaunchIntent(
-                                getContext(),
+                                Objects.requireNonNull(getContext()),
                                 drink.getId()
                         ),
                         DrinkDetailActivity.DRINK_ACTION_VIEW
@@ -89,7 +90,7 @@ public class DrinkListFragment extends Fragment implements TagListFragment.TagSe
             public void onClick(View view) {
                 startActivityForResult(
                         AddDrinkActivity.getLaunchIntent(
-                                getContext(),
+                                Objects.requireNonNull(getContext()),
                                 AddDrinkActivity.CFG_ACTION_ADD,
                                 0
                         ),
@@ -213,7 +214,7 @@ public class DrinkListFragment extends Fragment implements TagListFragment.TagSe
         }
     }
 
-    private final class TagFilter implements FilterHelper.Filter<Drink> {
+    private static final class TagFilter implements FilterHelper.Filter<Drink> {
         private final String query;
 
         TagFilter(final String query) {

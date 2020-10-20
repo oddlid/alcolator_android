@@ -17,7 +17,6 @@ class TagListAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TagViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(viewType, parent, false)
-        val vh = TagViewHolder(view)
 
         // set listener etc
         //vh.tv.setOnClickListener {
@@ -25,7 +24,7 @@ class TagListAdapter(
         //    listener.onSelectTag(it.toString())
         //}
 
-        return vh
+        return TagViewHolder(view)
     }
 
     override fun getItemViewType(position: Int): Int {

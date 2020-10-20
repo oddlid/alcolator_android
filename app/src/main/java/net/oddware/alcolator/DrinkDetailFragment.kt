@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.fragment_drink_detail.*
 import kotlinx.android.synthetic.main.fragment_drink_detail.view.*
@@ -113,7 +112,7 @@ class DrinkDetailFragment(private val drinkID: Int = DrinkDetailActivity.INVALID
 
         if (DrinkDetailActivity.INVALID_ID != drinkID) {
             Timber.d("Loading drink with id $drinkID")
-            drinkViewModel.get(drinkID).observe(viewLifecycleOwner, Observer {
+            drinkViewModel.get(drinkID).observe(viewLifecycleOwner, {
                 if (null != it) {
                     updateUI(it)
                 }
@@ -160,7 +159,7 @@ class DrinkDetailFragment(private val drinkID: Int = DrinkDetailActivity.INVALID
                             DrinkDetailActivity.INVALID_ID
                         )
                         if (DrinkDetailActivity.INVALID_ID != drinkID) {
-                            drinkViewModel.get(drinkID).observe(viewLifecycleOwner, Observer {
+                            drinkViewModel.get(drinkID).observe(viewLifecycleOwner, {
                                 if (null != it) {
                                     updateUI(it)
                                 }

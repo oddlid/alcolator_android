@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlinx-serialization'
 //apply plugin: 'java'
 
 android {
@@ -33,7 +34,11 @@ dependencies {
     //implementation "de.codecrafters.tableview:tableview:$rootProject.v_sortableTableView"
     //implementation "com.github.ISchwarz23:SortableTableView:v$rootProject.v_sortableTableView"
     implementation "com.sortabletableview.recyclerview:sortabletableview:$rootProject.v_sortableTableView"
+
     implementation "com.google.code.gson:gson:$rootProject.v_gson"
+    // switching over from gson to kotlinx serialization json
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:$rootProject.v_kxsJson"
+
     testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

@@ -34,6 +34,10 @@ I get "expected Nothing, got xxx".
 So I try to write this class in Java, because I'm tired of googling and not finding any
 good answers.
  */
+/*
+TODO: FilterHelper is borked when rotating. Only remembers already filtered list, and does not get
+ back to original list after any rotation.
+ */
 public class DrinkListFragment extends Fragment implements TagListFragment.TagSelectionListener {
     private SortableTableView<Drink> mTblDrinks;
     private TagListFragment mTagListFrag;
@@ -109,12 +113,18 @@ public class DrinkListFragment extends Fragment implements TagListFragment.TagSe
             }
         });
 
+        //if (null != mFilterHelper) {
+        //    mFilterHelper = null;
+        //}
+
         return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        //mFilterHelper = null;
 
         DrinkViewModel dvm = new ViewModelProvider(this).get(DrinkViewModel.class);
 
@@ -136,6 +146,13 @@ public class DrinkListFragment extends Fragment implements TagListFragment.TagSe
         }
         return dta.getItemCount();
     }
+
+
+    //@Override
+    //public void onResume() {
+    //    super.onResume();
+    //    mFilterHelper = new FilterHelper<>(mTblDrinks);
+    //}
 
     @Override
     public void onSelectTag(@NotNull String tag) {

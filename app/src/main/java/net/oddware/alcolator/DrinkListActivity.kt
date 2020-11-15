@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.activity_drink_list.*
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -125,6 +126,33 @@ class DrinkListActivity :
 
         drinkViewModel = ViewModelProvider(this).get(DrinkViewModel::class.java)
         cResolver = applicationContext.contentResolver
+
+        bottomNav.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.bNavItemDrinkList -> {
+                    with(supportFragmentManager.beginTransaction()) {
+                        replace(R.id.flDrinkList, DrinkListFragment())
+                        commit()
+                    }
+                    true
+                }
+                R.id.bNavItemTabList -> {
+                    with(supportFragmentManager.beginTransaction()) {
+                        replace(R.id.flDrinkList, TabListFragment())
+                        commit()
+                    }
+                    true
+                }
+                else -> true
+            }
+        }
+        bottomNav.selectedItemId = R.id.bNavItemDrinkList
+
+        /*
+        TODO: Find out how to keep the shown list (drinklist or tablist) after rotation. As it is now,
+              rotation will cause the drinklist to be loaded, but the selection stays on tablist if
+              that was the current page before rotation.
+         */
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -135,15 +163,29 @@ class DrinkListActivity :
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_delete_all -> {
-                val drinkListFrag = supportFragmentManager.findFragmentById(R.id.flDrinkList)
-                if (null != drinkListFrag) {
-                    if (drinkListFrag is DrinkListFragment) {
-                        if (drinkListFrag.listCount > 0) {
-                            DeleteAllDialog().show(
-                                supportFragmentManager,
-                                "ConfirmDeleteAll"
-                            )
+                // After adding the bottom nav, this is now very important, so that we don't try
+                // to delete the drinklist if we're on the tab page.
+                // TODO: We should rather switch the action of the delete menu item to delete tabs if
+                //  that's the current page
+                Timber.d("Current page: ${bottomNav.selectedItemId}")
+
+                when (bottomNav.selectedItemId) {
+                    R.id.bNavItemDrinkList -> {
+                        val drinkListFrag =
+                            supportFragmentManager.findFragmentById(R.id.flDrinkList)
+                        if (null != drinkListFrag) {
+                            if (drinkListFrag is DrinkListFragment) {
+                                if (drinkListFrag.listCount > 0) {
+                                    DeleteAllDialog().show(
+                                        supportFragmentManager,
+                                        "ConfirmDeleteAll"
+                                    )
+                                }
+                            }
                         }
+                    }
+                    R.id.bNavItemTabList -> {
+                        Timber.d("Request to delete all tabs")
                     }
                 }
             }

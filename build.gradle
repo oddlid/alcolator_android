@@ -8,7 +8,7 @@ buildscript {
         
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.1'
+        classpath 'com.android.tools.build:gradle:4.1.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
         // NOTE: Do not place your application dependencies here; they belong
@@ -38,7 +38,7 @@ ext {
     v_coreCtx = '1.3.2'
     v_timber = '4.7.1'
     //v_gson = '2.8.6'
-    v_room = '2.2.5'
+    v_room = '2.2.6'
     v_material = '1.2.1'
     v_archLifeCycle = '2.2.0'
     v_lifeCycle_CommonJ8 = '2.2.0'

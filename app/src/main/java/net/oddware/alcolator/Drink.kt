@@ -33,13 +33,52 @@ data class Drink(
 
     fun volumeAsL(): Double = volumeML / 1000.0
 
-    fun alcML(): Double = ((volumeML / 100.0) * alcPct)
+    fun alcML(): Double {
+        if (0 == volumeML) {
+            return 0.0
+        }
+        return ((volumeML / 100.0) * alcPct)
+    }
 
     fun waterML(): Double = volumeML - alcML()
 
-    fun pricePerAlcML(): Double = price / alcML()
+    fun pricePerAlcML(): Double {
+        if (0.0 == price || 0.0 == alcML()) {
+            return 0.0
+        }
+        return price / alcML()
+    }
 
-    fun pricePerDrinkML(): Double = price / volumeML
+    // This needs a check for 0
+    fun pricePerDrinkML(): Double {
+        if (0 == volumeML || 0.0 == price) {
+            return 0.0
+        }
+        return price / volumeML
+    }
+
+    // matchAlcML will return how many milliliters of other drink is needed to match milliliters of
+    // alcohol in this drink
+    fun matchAlcML(other: Drink): Double {
+        if (0.0 == alcML() || 0.0 == other.alcML()) {
+            return 0.0
+        }
+        // We first divide this.alcML() with other.alcML(), and then multiply the result
+        // with other.volumeML
+        //val div = alcML() / other.alcML()
+        //val res = div * other.volumeML
+        //return res
+        return (alcML() / other.alcML()) * other.volumeML
+    }
+
+    // Find how many other drinks it takes to get as much alcohol as in this drink
+    fun matchHowMany(other: Drink): Double {
+        val otherML = matchAlcML(other)
+        if (0.0 == otherML) {
+            return 0.0
+        }
+        return otherML / other.volumeML
+    }
 
     override fun compareTo(other: Drink): Int {
         return id.compareTo(other.id)

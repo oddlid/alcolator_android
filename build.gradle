@@ -2,6 +2,7 @@
 
 buildscript {
     ext.kotlin_version = '1.4.21'
+    ext.v_jetpackNav = '2.3.2'
     repositories {
         google()
         jcenter()
@@ -11,6 +12,7 @@ buildscript {
         classpath 'com.android.tools.build:gradle:4.1.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$v_jetpackNav"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -34,7 +36,7 @@ ext {
     //v_sortableTableView = '2.8.1' // open source version from Github
     v_sortableTableView = '3.2.0' // test license version
     v_kotlinStdLib = '1.4.21'
-    v_appCompat = '1.2.0'
+    v_appCompat = '1.3.0-beta01'
     v_coreCtx = '1.3.2'
     v_timber = '4.7.1'
     //v_gson = '2.8.6'
@@ -47,4 +49,6 @@ ext {
     v_coreTesting = '2.1.0'
     v_swipeRefreshLayout = '1.2.0-alpha01'
     v_kxsJson = '1.0.0'
+    v_jetpackNav = '2.3.2'
+    v_jetpackNavCompose = '1.0.0-alpha05'
 }

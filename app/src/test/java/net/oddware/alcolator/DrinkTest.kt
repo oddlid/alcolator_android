@@ -190,6 +190,18 @@ class DrinkTest {
             d1.matchAlcML(d2),
             0.0
         )
+
+        // How much Sitting for a bottle of Alamos red wine
+        d1.volumeML = 750
+        d1.alcPct = 13.0
+        d2.volumeML = 500
+        d2.alcPct = 6.4
+        Assert.assertEquals(
+            "You need 1523.4375 ML 6.4% to match 750 ML of 13% drink",
+            1523.4375,
+            d1.matchAlcML(d2),
+            0.0
+        )
     }
 
     @Test
@@ -244,6 +256,30 @@ class DrinkTest {
             d1.matchHowMany(d2),
             0.0
         )
+    }
 
+    @Test
+    fun testMatchDrink() {
+        val d1 = Drink()
+        val d2 = Drink()
+
+        // Match a bottle of Alamos red wine against Sitting Bulldog
+        d1.volumeML = 750
+        d1.alcPct = 13.0
+        d2.volumeML = 500
+        d2.alcPct = 6.4
+        val res = d1.matchDrink(d2)
+        Assert.assertEquals(
+            "You need 3.046875 X 500 ML 6.4% to match 750 ML of 13% drink",
+            3.046875,
+            res.times,
+            0.0
+        )
+        Assert.assertEquals(
+            "You need 1523.4375 ML 6.4% to match 750 ML of 13% drink",
+            1523.4375,
+            res.ml,
+            0.0
+        )
     }
 }

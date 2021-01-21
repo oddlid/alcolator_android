@@ -12,9 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity
-            android:name=".DrinkListActivity"
-            android:configChanges="orientation|screenSize|screenLayout">
+        <!--
+            Lifted this one out for when trying to implement JetPack Navigation
+            android:configChanges="orientation|screenSize|screenLayout"
+        -->
+        <activity android:name=".DrinkListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

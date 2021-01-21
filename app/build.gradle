@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlinx-serialization'
+apply plugin: "androidx.navigation.safeargs"
 //apply plugin: 'java'
 
 android {
@@ -75,4 +76,23 @@ dependencies {
 
     // Testing
     //androidTestImplementation "androidx.arch.core:core-testing:$rootProject.v_coreTesting"
+
+    // Jetpack Navigation stuff
+
+    // Java language implementation
+    implementation "androidx.navigation:navigation-fragment:$rootProject.v_jetpackNav"
+    implementation "androidx.navigation:navigation-ui:$rootProject.v_jetpackNav"
+
+    // Kotlin
+    implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.v_jetpackNav"
+    implementation "androidx.navigation:navigation-ui-ktx:$rootProject.v_jetpackNav"
+
+    // Feature module Support
+    implementation "androidx.navigation:navigation-dynamic-features-fragment:$rootProject.v_jetpackNav"
+
+    // Testing Navigation
+    androidTestImplementation "androidx.navigation:navigation-testing:$rootProject.v_jetpackNav"
+
+    // Jetpack Compose Integration
+    implementation "androidx.navigation:navigation-compose:$rootProject.v_jetpackNavCompose"
 }

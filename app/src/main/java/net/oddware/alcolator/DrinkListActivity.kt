@@ -136,6 +136,13 @@ class DrinkListActivity :
                     }
                     true
                 }
+                R.id.bNavItemCompareDrinks -> {
+                    with(supportFragmentManager.beginTransaction()) {
+                        replace(R.id.flDrinkList, CompareDrinksFragment())
+                        commit()
+                    }
+                    true
+                }
                 R.id.bNavItemTabList -> {
                     with(supportFragmentManager.beginTransaction()) {
                         replace(R.id.flDrinkList, TabListFragment())

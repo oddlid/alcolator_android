@@ -6,6 +6,11 @@
         android:icon="@drawable/ic_list"
         android:title="DrinkList" />
     <item
+        android:id="@+id/bNavItemCompareDrinks"
+        android:enabled="true"
+        android:icon="@drawable/ic_compare_arrows"
+        android:title="Compare drinks" />
+    <item
         android:id="@+id/bNavItemTabList"
         android:enabled="true"
         android:icon="@drawable/ic_receipt_long"

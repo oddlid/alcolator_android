@@ -31,10 +31,10 @@
     <string name="menu_restoreTxt">Import backup</string>
     <string name="act_DrinkDetailsTitle">Drink details</string>
     <string name="cmpDrinksHdr">Compare Alcohol Content</string>
-    <string name="cmpDrink1NameLbl">Drink:</string>
-    <string name="cmpDrink1VolLbl">Total volume (ml):</string>
-    <string name="cmpDrink1AlcVolLbl">Alcohol volume (ml):</string>
-    <string name="cmpDrink1PctLbl">Percentage:</string>
+    <string name="cmpDrink1NameLbl">Drinks:</string>
+    <string name="cmpDrink1VolLbl">Vol (ml):</string>
+    <string name="cmpDrink1AlcVolLbl">Alc (ml):</string>
+    <string name="cmpDrink1PctLbl">Percent:</string>
     <string name="cmpDrink1AmountLbl">Amount:</string>
     <string name="cmpDrink1AmountVal">1</string>
     <string name="cmpDrink1PriceLbl">Price:</string>

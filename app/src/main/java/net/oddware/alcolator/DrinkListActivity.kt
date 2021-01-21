@@ -28,6 +28,9 @@ class DrinkListActivity :
         const val REQ_CREATE_FILE = 1
         const val REQ_OPEN_FILE = 2
         const val MIME_TYPE = "application/json"
+        const val TAG_DRINK_LIST = "DrinkListFrag"
+        const val TAG_COMPARE_DRINKS = "CompareDrinksFrag"
+        const val TAG_TABS = "TabsFrag"
 
         @JvmStatic
         fun getCurrentDateISO8601String(): String {
@@ -120,6 +123,7 @@ class DrinkListActivity :
         setContentView(R.layout.activity_drink_list)
 
         with(supportFragmentManager.beginTransaction()) {
+            addToBackStack(TAG_DRINK_LIST)
             replace(R.id.flDrinkList, DrinkListFragment())
             commit()
         }
@@ -131,6 +135,7 @@ class DrinkListActivity :
             when (item.itemId) {
                 R.id.bNavItemDrinkList -> {
                     with(supportFragmentManager.beginTransaction()) {
+                        addToBackStack(TAG_DRINK_LIST)
                         replace(R.id.flDrinkList, DrinkListFragment())
                         commit()
                     }
@@ -138,6 +143,7 @@ class DrinkListActivity :
                 }
                 R.id.bNavItemCompareDrinks -> {
                     with(supportFragmentManager.beginTransaction()) {
+                        addToBackStack(TAG_COMPARE_DRINKS)
                         replace(R.id.flDrinkList, CompareDrinksFragment())
                         commit()
                     }
@@ -145,6 +151,7 @@ class DrinkListActivity :
                 }
                 R.id.bNavItemTabList -> {
                     with(supportFragmentManager.beginTransaction()) {
+                        addToBackStack(TAG_TABS)
                         replace(R.id.flDrinkList, TabListFragment())
                         commit()
                     }
@@ -153,7 +160,7 @@ class DrinkListActivity :
                 else -> true
             }
         }
-        bottomNav.selectedItemId = R.id.bNavItemDrinkList
+        //bottomNav.selectedItemId = R.id.bNavItemDrinkList
 
         /*
         TODO: Find out how to keep the shown list (drinklist or tablist) after rotation. As it is now,

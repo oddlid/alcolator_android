@@ -1,237 +1,225 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal">
 
-    <!--
-    -->
-    <TableLayout
-        android:id="@+id/tblDrinkDetail"
-        android:layout_width="match_parent"
+    <HorizontalScrollView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/lbl_def_margin"
-        android:stretchColumns="1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_gravity="center_horizontal">
 
-        <TableRow
+
+        <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/lbl_def_margin"
-            android:layout_marginStart="@dimen/lbl_def_margin"
-            android:layout_marginEnd="@dimen/lbl_def_margin">
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tvNameLbl"
-                android:layout_marginEnd="@dimen/lbl_def_margin"
-                android:gravity="end"
-                android:text="@string/det_tvNameLblTxt" />
+            <!--
+                app:layout_constraintEnd_toEndOf="parent"
+                android:gravity="center_horizontal"
+                    android:layout_marginStart="@dimen/lbl_def_margin"
+                    android:layout_marginTop="@dimen/lbl_def_margin"
+                    android:layout_marginEnd="@dimen/lbl_def_margin"
+                android:stretchColumns="*"
+            -->
+            <TableLayout
+                android:id="@+id/tblDrinkDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/lbl_def_margin"
+                android:gravity="center_horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/tvNameVal"
+                <TableRow
+                    android:id="@+id/detailRow0"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tvNameLbl"
+                        android:layout_marginEnd="@dimen/lbl_def_margin"
+                        android:gravity="start"
+                        android:text="@string/det_tvNameLblTxt" />
+
+                    <TextView
+                        android:id="@+id/tvNameVal"
+                        tools:text="Sitting Bulldog" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tvIDLbl"
+                        android:layout_marginEnd="@dimen/lbl_def_margin"
+                        android:gravity="start"
+                        android:text="@string/det_tvIDLblTxt" />
+
+                    <TextView
+                        android:id="@+id/tvIDVal"
+                        tools:text="2" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tvTagLbl"
+                        android:layout_marginEnd="@dimen/lbl_def_margin"
+                        android:gravity="start"
+                        android:text="@string/det_tvTagLblTxt" />
+
+                    <TextView
+                        android:id="@+id/tvTagVal"
+                        tools:text="Old Town" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tvVolLblTxt"
+                        android:layout_marginEnd="@dimen/lbl_def_margin"
+                        android:gravity="start"
+                        android:text="@string/det_tvVolLblTxt" />
+
+                    <TextView
+                        android:id="@+id/tvVolVal"
+                        tools:text="500" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tvPctLblTxt"
+                        android:layout_marginEnd="@dimen/lbl_def_margin"
+                        android:gravity="start"
+                        android:text="@string/det_tvPctLblTxt" />
+
+                    <TextView
+                        android:id="@+id/tvPctVal"
+                        tools:text="6.4" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tvPriceLblTxt"
+                        android:layout_marginEnd="@dimen/lbl_def_margin"
+                        android:gravity="start"
+                        android:text="@string/det_tvPriceLblTxt" />
+
+                    <TextView
+                        android:id="@+id/tvPriceVal"
+                        tools:text="69.0" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tvPricePerMLAlcLbl"
+                        android:layout_marginEnd="@dimen/lbl_def_margin"
+                        android:gravity="start"
+                        android:text="@string/det_tvPricePerMLAlcLblTxt" />
+
+                    <TextView
+                        android:id="@+id/tvPricePerMLAlcVal"
+                        tools:text="1.23456" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tvPricePerMLDrinkLbl"
+                        android:layout_marginEnd="@dimen/lbl_def_margin"
+                        android:gravity="start"
+                        android:text="@string/det_tvPricePerMLDrinkLblTxt" />
+
+                    <TextView
+                        android:id="@+id/tvPricePerMLDrinkVal"
+                        tools:text="1.23456" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tvVolWaterLbl"
+                        android:layout_marginEnd="@dimen/lbl_def_margin"
+                        android:gravity="start"
+                        android:text="@string/det_tvVolWaterLblTxt" />
+
+                    <TextView
+                        android:id="@+id/tvVolWaterVal"
+                        tools:text="1234" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tvVolAlcLbl"
+                        android:layout_marginEnd="@dimen/lbl_def_margin"
+                        android:gravity="start"
+                        android:text="@string/det_tvVolAlcLblTxt" />
+
+                    <TextView
+                        android:id="@+id/tvVolAlcVal"
+                        tools:text="1234" />
+                </TableRow>
+
+            </TableLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/lbl_def_margin"
-                tools:text="Sitting Bulldog" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/lbl_def_margin"
-            android:layout_marginEnd="@dimen/lbl_def_margin">
-
-            <TextView
-                android:id="@+id/tvIDLbl"
+                android:layout_marginTop="@dimen/lbl_def_margin"
                 android:layout_marginEnd="@dimen/lbl_def_margin"
-                android:gravity="end"
-                android:text="@string/det_tvIDLblTxt" />
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/tblDrinkDetail">
 
-            <TextView
-                android:id="@+id/tvIDVal"
-                android:layout_marginStart="@dimen/lbl_def_margin"
-                tools:text="2" />
-        </TableRow>
+                <Button
+                    android:id="@+id/btnEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/lbl_def_margin"
+                    android:text="@string/det_btnEditTxt" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/lbl_def_margin"
-            android:layout_marginEnd="@dimen/lbl_def_margin">
+                <Button
+                    android:id="@+id/btnDelete"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/lbl_def_margin"
+                    android:text="@string/det_btnDeleteTxt" />
 
-            <TextView
-                android:id="@+id/tvTagLbl"
-                android:gravity="end"
-                android:layout_marginEnd="@dimen/lbl_def_margin"
-                android:text="@string/det_tvTagLblTxt" />
+                <Button
+                    android:id="@+id/btnClose"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/det_btnCloseTxt" />
 
-            <TextView
-                android:id="@+id/tvTagVal"
-                android:layout_marginStart="@dimen/lbl_def_margin"
-                tools:text="Old Town" />
-        </TableRow>
+            </LinearLayout>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/lbl_def_margin"
-            android:layout_marginEnd="@dimen/lbl_def_margin">
-
-            <TextView
-                android:id="@+id/tvVolLblTxt"
-                android:layout_marginEnd="@dimen/lbl_def_margin"
-                android:gravity="end"
-                android:text="@string/det_tvVolLblTxt" />
-
-            <TextView
-                android:id="@+id/tvVolVal"
-                android:layout_marginStart="@dimen/lbl_def_margin"
-                tools:text="500" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/lbl_def_margin"
-            android:layout_marginEnd="@dimen/lbl_def_margin">
-
-            <TextView
-                android:id="@+id/tvPctLblTxt"
-                android:gravity="end"
-                android:layout_marginEnd="@dimen/lbl_def_margin"
-                android:text="@string/det_tvPctLblTxt" />
-
-            <TextView
-                android:id="@+id/tvPctVal"
-                android:layout_marginStart="@dimen/lbl_def_margin"
-                tools:text="6.4" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/lbl_def_margin"
-            android:layout_marginEnd="@dimen/lbl_def_margin">
-
-            <TextView
-                android:id="@+id/tvPriceLblTxt"
-                android:gravity="end"
-                android:layout_marginEnd="@dimen/lbl_def_margin"
-                android:text="@string/det_tvPriceLblTxt" />
-
-            <TextView
-                android:id="@+id/tvPriceVal"
-                android:layout_marginStart="@dimen/lbl_def_margin"
-                tools:text="69.0" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/lbl_def_margin"
-            android:layout_marginEnd="@dimen/lbl_def_margin">
-
-            <TextView
-                android:id="@+id/tvPricePerMLAlcLbl"
-                android:gravity="end"
-                android:layout_marginEnd="@dimen/lbl_def_margin"
-                android:text="@string/det_tvPricePerMLAlcLblTxt" />
-
-            <TextView
-                android:id="@+id/tvPricePerMLAlcVal"
-                android:layout_marginStart="@dimen/lbl_def_margin"
-                tools:text="1.23456" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/lbl_def_margin"
-            android:layout_marginEnd="@dimen/lbl_def_margin">
-
-            <TextView
-                android:id="@+id/tvPricePerMLDrinkLbl"
-                android:gravity="end"
-                android:layout_marginEnd="@dimen/lbl_def_margin"
-                android:text="@string/det_tvPricePerMLDrinkLblTxt" />
-
-            <TextView
-                android:id="@+id/tvPricePerMLDrinkVal"
-                android:layout_marginStart="@dimen/lbl_def_margin"
-                tools:text="1.23456" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/lbl_def_margin"
-            android:layout_marginEnd="@dimen/lbl_def_margin">
-
-            <TextView
-                android:id="@+id/tvVolWaterLbl"
-                android:gravity="end"
-                android:layout_marginEnd="@dimen/lbl_def_margin"
-                android:text="@string/det_tvVolWaterLblTxt" />
-
-            <TextView
-                android:id="@+id/tvVolWaterVal"
-                android:layout_marginStart="@dimen/lbl_def_margin"
-                tools:text="1234" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/lbl_def_margin"
-            android:layout_marginEnd="@dimen/lbl_def_margin">
-
-            <TextView
-                android:id="@+id/tvVolAlcLbl"
-                android:gravity="end"
-                android:layout_marginEnd="@dimen/lbl_def_margin"
-                android:text="@string/det_tvVolAlcLblTxt" />
-
-            <TextView
-                android:id="@+id/tvVolAlcVal"
-                android:layout_marginStart="@dimen/lbl_def_margin"
-                tools:text="1234" />
-        </TableRow>
-
-        <TableRow
-            android:layout_marginTop="@dimen/lbl_def_margin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/lbl_def_margin"
-            android:layout_marginEnd="@dimen/lbl_def_margin">
-
-            <Button
-                android:id="@+id/btnDelete"
-                android:layout_marginEnd="@dimen/lbl_def_margin"
-                android:text="@string/det_btnDeleteTxt" />
-
-            <Button
-                android:id="@+id/btnEdit"
-                android:layout_marginStart="@dimen/lbl_def_margin"
-                android:text="@string/det_btnEditTxt" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_marginTop="@dimen/lbl_def_margin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/lbl_def_margin"
-            android:layout_marginEnd="@dimen/lbl_def_margin">
-
-            <Button
-                android:id="@+id/btnClose"
-                android:layout_span="2"
-                android:text="@string/det_btnCloseTxt" />
-        </TableRow>
-    </TableLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </HorizontalScrollView>
+</ScrollView>

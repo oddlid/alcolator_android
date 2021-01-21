@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal"
+    tools:context=".CompareDrinksFragment">
+
+    <!--
+    Trying to find out how to display stuff...
+
+    Compare <dropdown> to <dropdown> [Go]
+
+    To get the same alcohol content (X ml) as in one X ML "X" (price: X @<tag>),
+    you'll need:
+    X.X (X ml) "X" (@<tag>), costing you X.X
+
+    To get the same alcohol content (32 ML) as in one 500 ML "Sitting Bulldog"
+    (price: 69 @ Old Town), you'll need:
+    2.0 x (80 ML) "40% shot" (@ Old Town), costing you 256.5
+
+    Or more of a table format:
+
+    Name:           Sitting Bulldog @ Old Town // drop down
+    Percentage:     6.4                        // filled in when drink chosen
+    Total Volume:   500 ML                     // filled in when drink chosen
+    Alcohol volume: 32 ML                      // filled in when drink chosen
+    Price:          69                         // filled in when drink chosen
+
+    =
+
+    Name:           Shot @ Old Town            // drop down
+    Percentage:     40                         // filled in when drink chosen
+    Amount:         2.3 X 40 ML                // calculated when drink chosen
+    Volume:         XXX ML                     // calculated when drink chosen
+    Price:          123.4                      // calculated when drink chosen
+
+
+    -->
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvCmpDrink1NameLbl"
+                android:layout_marginEnd="@dimen/lbl_def_margin"
+                android:text="@string/cmpDrink1NameLbl"
+                tools:text="Drink:" />
+
+            <Spinner
+                android:id="@+id/spnCmpDrink1Chooser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/bogusDrinks"
+                tools:text="List of drinks" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvCmpDrink1PctLbl"
+                android:layout_marginEnd="@dimen/lbl_def_margin"
+                android:text="@string/cmpDrink1PctLbl"
+                tools:text="Percentage:" />
+
+            <TextView
+                android:id="@+id/tvCmpDrink1PctVal"
+                tools:text="6.4" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvCmpDrink1VolLbl"
+                android:layout_marginEnd="@dimen/lbl_def_margin"
+                android:text="@string/cmpDrink1VolLbl"
+                tools:text="Total volume (ml):" />
+
+            <TextView
+                android:id="@+id/tvCmpDrink1VolVal"
+                tools:text="500" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvCmpDrink1AlcVolLbl"
+                android:layout_marginEnd="@dimen/lbl_def_margin"
+                android:text="@string/cmpDrink1AlcVolLbl"
+                tools:text="Alcohol volume (ml):" />
+
+            <TextView
+                android:id="@+id/tvCmpDrink1AlcVolVal"
+                tools:text="32" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvCmpDrink1PriceLbl"
+                android:layout_marginEnd="@dimen/lbl_def_margin"
+                android:text="@string/cmpDrink1PriceLbl"
+                tools:text="Price:" />
+
+            <TextView
+                android:id="@+id/tvCmpDrink1PriceVal"
+                tools:text="69.0" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_span="2"
+                android:background="@color/iconColor" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvCmpDrinkSep"
+                android:text="@string/cmpDrinkSepLbl"
+                tools:text="=" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_span="2"
+                android:background="@color/iconColor" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvCmpDrink2NameLbl"
+                android:layout_marginEnd="@dimen/lbl_def_margin"
+                android:text="@string/cmpDrink2NameLbl"
+                tools:text="Drink:" />
+
+            <Spinner
+                android:id="@+id/spnCmpDrink2Chooser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/bogusDrinks"
+                tools:text="List of drinks" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvCmpDrink2PctLbl"
+                android:layout_marginEnd="@dimen/lbl_def_margin"
+                android:text="@string/cmpDrink2PctLbl"
+                tools:text="Percentage:" />
+
+            <TextView
+                android:id="@+id/tvCmpDrink2PctVal"
+                tools:text="6.4" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvCmpDrink2AmountLbl"
+                android:layout_marginEnd="@dimen/lbl_def_margin"
+                android:text="@string/cmpDrink2AmountLbl"
+                tools:text="Amount:" />
+
+            <TextView
+                android:id="@+id/tvCmpDrink2AmountVal"
+                tools:text="2.3 X 40 ml" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvCmpDrink2VolLbl"
+                android:layout_marginEnd="@dimen/lbl_def_margin"
+                android:text="@string/cmpDrink2VolLbl"
+                tools:text="Volume:" />
+
+            <TextView
+                android:id="@+id/tvCmpDrink2VolVal"
+                tools:text="XXX ml" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvCmpDrink2PriceLbl"
+                android:layout_marginEnd="@dimen/lbl_def_margin"
+                android:text="@string/cmpDrink2PriceLbl"
+                tools:text="Price:" />
+
+            <TextView
+                android:id="@+id/tvCmpDrink2PriceVal"
+                tools:text="XXX" />
+
+        </TableRow>
+
+    </TableLayout>
+
+</ScrollView>

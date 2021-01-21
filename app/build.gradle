@@ -38,6 +38,7 @@ dependencies {
     //implementation "com.google.code.gson:gson:$rootProject.v_gson"
     // switching over from gson to kotlinx serialization json
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:$rootProject.v_kxsJson"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

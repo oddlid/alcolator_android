@@ -83,4 +83,8 @@ data class Drink(
     override fun compareTo(other: Drink): Int {
         return id.compareTo(other.id)
     }
+
+    override fun toString(): String {
+        return name
+    }
 }

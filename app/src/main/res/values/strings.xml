@@ -30,6 +30,18 @@
     <string name="menu_backupTxt">Export backup</string>
     <string name="menu_restoreTxt">Import backup</string>
     <string name="act_DrinkDetailsTitle">Drink details</string>
+    <string name="cmpDrink1NameLbl">Drink:</string>
+    <string name="cmpDrink1VolLbl">Total volume (ml):</string>
+    <string name="cmpDrink1AlcVolLbl">Alcohol volume (ml):</string>
+    <string name="cmpDrink1PctLbl">Percentage:</string>
+    <string name="cmpDrink1PriceLbl">Price:</string>
+    <string name="cmpDrinkSpnHdr">-- Select Drink --</string>
+    <string name="cmpDrink2NameLbl">Drink:</string>
+    <string name="cmpDrink2PctLbl">Percentage:</string>
+    <string name="cmpDrink2AmountLbl">Amount:</string>
+    <string name="cmpDrink2VolLbl">Volume (ml):</string>
+    <string name="cmpDrink2PriceLbl">Price:</string>
+    <string name="cmpDrinkSepLbl">=</string>
 
     <string-array name="colHdrs">
         <item>Name</item>
@@ -38,5 +50,12 @@
         <item>%</item>
         <item>Alc (ml)</item>
         <item>ML price alc</item>
+    </string-array>
+
+    <string-array name="bogusDrinks">
+        <item>@string/cmpDrinkSpnHdr</item>
+        <item>Sitting Bulldog @ Old Town</item>
+        <item>Folköl @ Butiken</item>
+        <item>Rödvin @ Systemet</item>
     </string-array>
 </resources>

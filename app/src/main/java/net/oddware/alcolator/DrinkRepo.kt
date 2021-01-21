@@ -1,7 +1,6 @@
 package net.oddware.alcolator
 
 import android.content.Context
-import androidx.lifecycle.LiveData
 import timber.log.Timber
 
 class DrinkRepo(private val drinkDao: DrinkDao) {
@@ -23,14 +22,20 @@ class DrinkRepo(private val drinkDao: DrinkDao) {
     }
 
     val drinks = drinkDao.getDrinks()
+    val tags = drinkDao.getTags()
 
-    private inline fun LiveData<List<Drink>>.get(index: Int): Drink? {
-        return value?.get(index)
-    }
+    //private inline fun LiveData<List<Drink>>.get(index: Int): Drink? {
+    //    return value?.get(index)
+    //}
 
     suspend fun add(drink: Drink) {
         Timber.d("Adding drink to database")
         drinkDao.insert(drink)
+    }
+
+    suspend fun import(drinks: List<Drink>) {
+        Timber.d("Importing list of drinks to database")
+        drinkDao.importDrinks(drinks)
     }
 
     suspend fun clear() {

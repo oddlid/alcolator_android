@@ -27,14 +27,41 @@
     <string name="dlgDelOne_btnOkTxt">Delete</string>
     <string name="dlgDelOne_btnCancelTxt">Cancel</string>
     <string name="menu_delAllTxt">Delete all drinks</string>
+    <string name="menu_backupTxt">Export backup</string>
+    <string name="menu_restoreTxt">Import backup</string>
     <string name="act_DrinkDetailsTitle">Drink details</string>
+    <string name="cmpDrinksHdr">Compare Alcohol Content</string>
+    <string name="cmpDrink1NameLbl">Drinks:</string>
+    <string name="cmpDrink1VolLbl">Vol (ml):</string>
+    <string name="cmpDrink1AlcVolLbl">Alc (ml):</string>
+    <string name="cmpDrink1PctLbl">Percent:</string>
+    <string name="cmpDrink1AmountLbl">Amount:</string>
+    <string name="cmpDrink1AmountVal">1</string>
+    <string name="cmpDrink1PriceLbl">Price:</string>
+    <string name="cmpDrink1PricePMLALbl">Price per ml alcohol:</string>
+    <string name="cmpDrinkSpnHdr">-- Select Drink</string>
+    <string name="cmpDrink2NameLbl">Drink:</string>
+    <string name="cmpDrink2PctLbl">Percentage:</string>
+    <string name="cmpDrink2AmountLbl">Amount:</string>
+    <string name="cmpDrink2VolLbl">Total volume (ml):</string>
+    <string name="cmpDrink2AlcVolLbl">Alcohol volume (ml):</string>
+    <string name="cmpDrink2PriceLbl">Price:</string>
+    <string name="cmpDrink2PricePMLALbl">Price per ml alcohol:</string>
+    <string name="cmpDrinkSepLbl">=</string>
 
     <string-array name="colHdrs">
         <item>Name</item>
-        <item>ML</item>
-        <item>#</item>
+        <item>Vol (ml)</item>
+        <item>Price</item>
         <item>%</item>
-        <item>Alc</item>
-        <item># Alc</item>
+        <item>Alc (ml)</item>
+        <item>ML price alc</item>
+    </string-array>
+
+    <string-array name="bogusDrinks">
+        <item>@string/cmpDrinkSpnHdr</item>
+        <item>Sitting Bulldog @ Old Town</item>
+        <item>Folköl @ Butiken</item>
+        <item>Rödvin @ Systemet</item>
     </string-array>
 </resources>

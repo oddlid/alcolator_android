@@ -32,8 +32,7 @@ class DrinkTableAdapter(
         viewType: Int
     ): ViewHolder {
         //Timber.d("Column index: $columnIndex")
-        val vh = ViewHolder(TextView(context))
-        return vh
+        return ViewHolder(TextView(context))
     }
 
     override fun onBindCellViewHolder(cellViewHolder: ViewHolder?, rowIndex: Int, colIndex: Int) {

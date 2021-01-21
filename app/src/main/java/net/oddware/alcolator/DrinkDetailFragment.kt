@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.fragment_drink_detail.*
 import kotlinx.android.synthetic.main.fragment_drink_detail.view.*
@@ -17,6 +16,33 @@ import timber.log.Timber
 class DrinkDetailFragment(private val drinkID: Int = DrinkDetailActivity.INVALID_ID) :
     Fragment(),
     DeleteOneDialog.DeleteOneDialogListener {
+
+    //companion object {
+    //    // This didn't work at all
+    //    fun getBorders(
+    //        bgColor: Int,
+    //        borderColor: Int,
+    //        left: Int,
+    //        top: Int,
+    //        right: Int,
+    //        bottom: Int
+    //    ): LayerDrawable {
+    //        val borderColorDrawable = ColorDrawable(borderColor)
+    //        val bgColorDrawable = ColorDrawable(bgColor)
+    //        val drawables = arrayOf(borderColorDrawable, bgColorDrawable)
+    //        val layerDrawable = LayerDrawable(drawables)
+
+    //        layerDrawable.setLayerInset(
+    //            1, // Index of the drawable to adjust [background color layer]
+    //            left,     // Number of pixels to add to the left bound [left border]
+    //            top,      // Number of pixels to add to the top bound [top border]
+    //            right,    // Number of pixels to add to the right bound [right border]
+    //            bottom    // Number of pixels to add to the bottom bound [bottom border]
+    //        )
+
+    //        return layerDrawable
+    //    }
+    //}
 
     private var drinkObj: Drink? = null
     private lateinit var drinkViewModel: DrinkViewModel
@@ -64,6 +90,16 @@ class DrinkDetailFragment(private val drinkID: Int = DrinkDetailActivity.INVALID
                     //activity?.finish()
                 }
             }
+
+            // Didn't work at all
+            //view.detailRow0.background = getBorders(
+            //    Color.TRANSPARENT,
+            //    Color.RED,
+            //    0,
+            //    0,
+            //    0,
+            //    2
+            //)
         }
 
         Timber.d("DrinkDetailFragment created")
@@ -76,7 +112,7 @@ class DrinkDetailFragment(private val drinkID: Int = DrinkDetailActivity.INVALID
 
         if (DrinkDetailActivity.INVALID_ID != drinkID) {
             Timber.d("Loading drink with id $drinkID")
-            drinkViewModel.get(drinkID).observe(viewLifecycleOwner, Observer {
+            drinkViewModel.get(drinkID).observe(viewLifecycleOwner, {
                 if (null != it) {
                     updateUI(it)
                 }
@@ -123,7 +159,7 @@ class DrinkDetailFragment(private val drinkID: Int = DrinkDetailActivity.INVALID
                             DrinkDetailActivity.INVALID_ID
                         )
                         if (DrinkDetailActivity.INVALID_ID != drinkID) {
-                            drinkViewModel.get(drinkID).observe(viewLifecycleOwner, Observer {
+                            drinkViewModel.get(drinkID).observe(viewLifecycleOwner, {
                                 if (null != it) {
                                     updateUI(it)
                                 }

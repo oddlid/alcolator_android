@@ -1,5 +1,5 @@
-/*
 package net.oddware.alcolator
+/*
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -8,8 +8,14 @@ interface DrinkDao {
     @Query("SELECT * from drinks")
     fun getDrinks(): LiveData<List<Drink>>
 
+    @Query("SELECT DISTINCT tag FROM drinks")
+    fun getTags(): LiveData<List<String>>
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(drink: Drink)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun importDrinks(drinks: List<Drink>)
 
     @Query("DELETE FROM drinks")
     suspend fun deleteAll()
@@ -22,4 +28,5 @@ interface DrinkDao {
 
     @Query("SELECT * FROM drinks WHERE id == :id")
     suspend fun get(id: Int): Drink
+
 }

@@ -7,14 +7,14 @@
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/tvTagListHdrLbl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/lbl_def_margin"
         android:gravity="center_horizontal"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:text="Filter by tag:"
-        tools:text="Filter by tag:" />
+        android:text="@string/dlgTagList_tvTagListHdrLblTxt" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvTagList"
@@ -29,19 +29,11 @@
         android:gravity="center_horizontal"
         android:orientation="horizontal">
 
-        <!--
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="Filter" />
-        -->
-
         <Button
             android:id="@+id/btnTagListReset"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Reset"
-            tools:text="Reset" />
+            android:text="@string/dlgTagList_btnResetTxt" />
     </LinearLayout>
 
 </LinearLayout>

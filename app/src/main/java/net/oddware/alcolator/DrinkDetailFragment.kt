@@ -9,8 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import kotlinx.android.synthetic.main.fragment_drink_detail.*
-import kotlinx.android.synthetic.main.fragment_drink_detail.view.*
+import net.oddware.alcolator.databinding.FragmentDrinkDetailBinding
 import timber.log.Timber
 
 class DrinkDetailFragment(private val drinkID: Int = DrinkDetailActivity.INVALID_ID) :
@@ -46,19 +45,25 @@ class DrinkDetailFragment(private val drinkID: Int = DrinkDetailActivity.INVALID
 
     private var drinkObj: Drink? = null
     private lateinit var drinkViewModel: DrinkViewModel
+    private var _binding: FragmentDrinkDetailBinding? = null
+
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_drink_detail, container, false)
+        _binding = FragmentDrinkDetailBinding.inflate(inflater, container, false)
+        val view = binding.root
 
-        view.btnClose.setOnClickListener {
+        binding.btnClose.setOnClickListener {
             activity?.finish()
         }
 
-        view.btnDelete.setOnClickListener {
+        binding.btnDelete.setOnClickListener {
             Timber.d("Delete clicked, checking for Fragment Manager...")
             val fm = activity?.supportFragmentManager ?: return@setOnClickListener
             Timber.d("We have a Fragment Manager...")
@@ -70,7 +75,7 @@ class DrinkDetailFragment(private val drinkID: Int = DrinkDetailActivity.INVALID
             dod.show(fm, "ConfirmDeleteOne")
         }
 
-        view.btnEdit.setOnClickListener {
+        binding.btnEdit.setOnClickListener {
             context?.let {
                 drinkObj?.run {
                     startActivityForResult(
@@ -106,6 +111,11 @@ class DrinkDetailFragment(private val drinkID: Int = DrinkDetailActivity.INVALID
         return view
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         drinkViewModel = ViewModelProvider(this).get(DrinkViewModel::class.java)
@@ -124,16 +134,16 @@ class DrinkDetailFragment(private val drinkID: Int = DrinkDetailActivity.INVALID
 
     private fun updateUI(d: Drink?) {
         drinkObj = d
-        tvIDVal.text = d?.id.toString()
-        tvTagVal.text = d?.tag
-        tvNameVal.text = d?.name
-        tvVolVal.text = d?.volumeML.toString()
-        tvPctVal.text = d?.alcPct.toString()
-        tvPriceVal.text = d?.price.toString()
-        tvPricePerMLAlcVal.text = d?.pricePerAlcML().toString()
-        tvPricePerMLDrinkVal.text = d?.pricePerDrinkML().toString()
-        tvVolWaterVal.text = d?.waterML().toString()
-        tvVolAlcVal.text = d?.alcML().toString()
+        binding.tvIDVal.text = d?.id.toString()
+        binding.tvTagVal.text = d?.tag
+        binding.tvNameVal.text = d?.name
+        binding.tvVolVal.text = d?.volumeML.toString()
+        binding.tvPctVal.text = d?.alcPct.toString()
+        binding.tvPriceVal.text = d?.price.toString()
+        binding.tvPricePerMLAlcVal.text = d?.pricePerAlcML().toString()
+        binding.tvPricePerMLDrinkVal.text = d?.pricePerDrinkML().toString()
+        binding.tvVolWaterVal.text = d?.waterML().toString()
+        binding.tvVolAlcVal.text = d?.alcML().toString()
     }
 
     override fun onPositiveClick(df: DialogFragment) {

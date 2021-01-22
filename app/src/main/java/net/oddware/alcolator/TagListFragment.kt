@@ -7,8 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.fragment_tag_list.*
-import kotlinx.android.synthetic.main.fragment_tag_list.view.*
+import net.oddware.alcolator.databinding.FragmentTagListBinding
 
 class TagListFragment(private val listener: TagSelectionListener) : DialogFragment() {
     interface TagSelectionListener {
@@ -18,6 +17,11 @@ class TagListFragment(private val listener: TagSelectionListener) : DialogFragme
     }
 
     private lateinit var drinkViewModel: DrinkViewModel
+    private var _binding: FragmentTagListBinding? = null
+
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,21 +33,27 @@ class TagListFragment(private val listener: TagSelectionListener) : DialogFragme
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_tag_list, container, false)
+        _binding = FragmentTagListBinding.inflate(inflater, container, false)
+        val view = binding.root
 
         val lloMgr = LinearLayoutManager(view.context)
-        with(view.rvTagList) {
+        with(binding.rvTagList) {
             // addItemDecoration
             setHasFixedSize(true)
             layoutManager = lloMgr
             //adapter = TagListAdapter()
         }
 
-        view.btnTagListReset.setOnClickListener {
+        binding.btnTagListReset.setOnClickListener {
             listener.onResetTag()
         }
 
         return view
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -53,7 +63,7 @@ class TagListFragment(private val listener: TagSelectionListener) : DialogFragme
 
         drinkViewModel.tags.observe(viewLifecycleOwner, {
             if (null != it) {
-                rvTagList.adapter = TagListAdapter(it, listener)
+                binding.rvTagList.adapter = TagListAdapter(it, listener)
             }
         })
     }

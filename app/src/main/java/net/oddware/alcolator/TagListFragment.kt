@@ -18,7 +18,6 @@ class TagListFragment(private val listener: TagSelectionListener) : DialogFragme
 
     private lateinit var drinkViewModel: DrinkViewModel
     private var _binding: FragmentTagListBinding? = null
-
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!

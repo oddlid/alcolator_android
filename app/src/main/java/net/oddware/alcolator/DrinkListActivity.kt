@@ -11,14 +11,21 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.activity_drink_list.*
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import net.oddware.alcolator.databinding.ActivityDrinkListBinding
 import timber.log.Timber
 import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
+
+/*
+TODO: 2021-01-22 01:35
+  The drink list gets fucked up when rotating, if a filter is applied before rotation.
+  It will then only have filtered values as its entire list, so clearing the filter or selecting
+  another tag will not work. Don't yet know how to fix this.
+ */
 
 class DrinkListActivity :
     AppCompatActivity(),
@@ -43,6 +50,144 @@ class DrinkListActivity :
 
     private lateinit var drinkViewModel: DrinkViewModel
     private lateinit var cResolver: ContentResolver
+    private lateinit var binding: ActivityDrinkListBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityDrinkListBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+
+        with(supportFragmentManager.beginTransaction()) {
+            addToBackStack(TAG_DRINK_LIST)
+            replace(R.id.flDrinkList, DrinkListFragment())
+            commit()
+        }
+
+        drinkViewModel = ViewModelProvider(this).get(DrinkViewModel::class.java)
+        cResolver = applicationContext.contentResolver
+
+        binding.bottomNav.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.bNavItemDrinkList -> {
+                    with(supportFragmentManager.beginTransaction()) {
+                        addToBackStack(TAG_DRINK_LIST)
+                        replace(R.id.flDrinkList, DrinkListFragment())
+                        commit()
+                    }
+                    true
+                }
+                R.id.bNavItemCompareDrinks -> {
+                    with(supportFragmentManager.beginTransaction()) {
+                        addToBackStack(TAG_COMPARE_DRINKS)
+                        replace(R.id.flDrinkList, CompareDrinksFragment())
+                        commit()
+                    }
+                    true
+                }
+                R.id.bNavItemTabList -> {
+                    with(supportFragmentManager.beginTransaction()) {
+                        addToBackStack(TAG_TABS)
+                        replace(R.id.flDrinkList, TabListFragment())
+                        commit()
+                    }
+                    true
+                }
+                else -> true
+            }
+        }
+        //bottomNav.selectedItemId = R.id.bNavItemDrinkList
+
+        /*
+        TODO: Find out how to keep the shown list (drinklist or tablist) after rotation. As it is now,
+              rotation will cause the drinklist to be loaded, but the selection stays on tablist if
+              that was the current page before rotation.
+         */
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.action_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_delete_all -> {
+                // After adding the bottom nav, this is now very important, so that we don't try
+                // to delete the drinklist if we're on the tab page.
+                // TODO: We should rather switch the action of the delete menu item to delete tabs if
+                //  that's the current page
+                Timber.d("Current page: ${binding.bottomNav.selectedItemId}")
+
+                when (binding.bottomNav.selectedItemId) {
+                    R.id.bNavItemDrinkList -> {
+                        val drinkListFrag =
+                            supportFragmentManager.findFragmentById(R.id.flDrinkList)
+                        if (null != drinkListFrag) {
+                            if (drinkListFrag is DrinkListFragment) {
+                                if (drinkListFrag.listCount > 0) {
+                                    DeleteAllDialog().show(
+                                        supportFragmentManager,
+                                        "ConfirmDeleteAll"
+                                    )
+                                }
+                            }
+                        }
+                    }
+                    R.id.bNavItemTabList -> {
+                        Timber.d("Request to delete all tabs")
+                    }
+                }
+            }
+            R.id.action_backup -> {
+                createFile()
+            }
+            R.id.action_backup_restore -> {
+                openFile()
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (Activity.RESULT_OK == resultCode) {
+            when (requestCode) {
+                REQ_CREATE_FILE -> {
+                    //Timber.d("Create file: $data")
+                    data?.data?.also { uri ->
+                        //Timber.d("Uri: $uri")
+                        if (writeBackup(uri)) {
+                            showMessage("Success writing backup :)")
+                        } else {
+                            showMessage("Error writing backup :'(")
+                        }
+                    }
+                }
+                REQ_OPEN_FILE -> {
+                    Timber.d("Open file: $data")
+                    data?.data?.also { uri ->
+                        Timber.d("Uri: $uri")
+                        if (restoreBackup(uri)) {
+                            showMessage("Success restoring from backup")
+                        } else {
+                            showMessage("Error restoring from backup")
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    override fun onPositiveClick(df: DialogFragment) {
+        Timber.d("Deleting all drinks from DB...")
+        drinkViewModel.clear()
+    }
+
+    override fun onNegativeClick(df: DialogFragment) {
+        Timber.d("Delete all cancelled")
+    }
 
     private fun createFile() {
         val intent = Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
@@ -118,138 +263,4 @@ class DrinkListActivity :
         ).show()
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_drink_list)
-
-        with(supportFragmentManager.beginTransaction()) {
-            addToBackStack(TAG_DRINK_LIST)
-            replace(R.id.flDrinkList, DrinkListFragment())
-            commit()
-        }
-
-        drinkViewModel = ViewModelProvider(this).get(DrinkViewModel::class.java)
-        cResolver = applicationContext.contentResolver
-
-        bottomNav.setOnNavigationItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.bNavItemDrinkList -> {
-                    with(supportFragmentManager.beginTransaction()) {
-                        addToBackStack(TAG_DRINK_LIST)
-                        replace(R.id.flDrinkList, DrinkListFragment())
-                        commit()
-                    }
-                    true
-                }
-                R.id.bNavItemCompareDrinks -> {
-                    with(supportFragmentManager.beginTransaction()) {
-                        addToBackStack(TAG_COMPARE_DRINKS)
-                        replace(R.id.flDrinkList, CompareDrinksFragment())
-                        commit()
-                    }
-                    true
-                }
-                R.id.bNavItemTabList -> {
-                    with(supportFragmentManager.beginTransaction()) {
-                        addToBackStack(TAG_TABS)
-                        replace(R.id.flDrinkList, TabListFragment())
-                        commit()
-                    }
-                    true
-                }
-                else -> true
-            }
-        }
-        //bottomNav.selectedItemId = R.id.bNavItemDrinkList
-
-        /*
-        TODO: Find out how to keep the shown list (drinklist or tablist) after rotation. As it is now,
-              rotation will cause the drinklist to be loaded, but the selection stays on tablist if
-              that was the current page before rotation.
-         */
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.action_menu, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.action_delete_all -> {
-                // After adding the bottom nav, this is now very important, so that we don't try
-                // to delete the drinklist if we're on the tab page.
-                // TODO: We should rather switch the action of the delete menu item to delete tabs if
-                //  that's the current page
-                Timber.d("Current page: ${bottomNav.selectedItemId}")
-
-                when (bottomNav.selectedItemId) {
-                    R.id.bNavItemDrinkList -> {
-                        val drinkListFrag =
-                            supportFragmentManager.findFragmentById(R.id.flDrinkList)
-                        if (null != drinkListFrag) {
-                            if (drinkListFrag is DrinkListFragment) {
-                                if (drinkListFrag.listCount > 0) {
-                                    DeleteAllDialog().show(
-                                        supportFragmentManager,
-                                        "ConfirmDeleteAll"
-                                    )
-                                }
-                            }
-                        }
-                    }
-                    R.id.bNavItemTabList -> {
-                        Timber.d("Request to delete all tabs")
-                    }
-                }
-            }
-            R.id.action_backup -> {
-                createFile()
-            }
-            R.id.action_backup_restore -> {
-                openFile()
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (Activity.RESULT_OK == resultCode) {
-            when (requestCode) {
-                REQ_CREATE_FILE -> {
-                    //Timber.d("Create file: $data")
-                    data?.data?.also { uri ->
-                        //Timber.d("Uri: $uri")
-                        if (writeBackup(uri)) {
-                            showMessage("Success writing backup :)")
-                        } else {
-                            showMessage("Error writing backup :'(")
-                        }
-                    }
-                }
-                REQ_OPEN_FILE -> {
-                    Timber.d("Open file: $data")
-                    data?.data?.also { uri ->
-                        Timber.d("Uri: $uri")
-                        if (restoreBackup(uri)) {
-                            showMessage("Success restoring from backup")
-                        } else {
-                            showMessage("Error restoring from backup")
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    override fun onPositiveClick(df: DialogFragment) {
-        Timber.d("Deleting all drinks from DB...")
-        drinkViewModel.clear()
-    }
-
-    override fun onNegativeClick(df: DialogFragment) {
-        Timber.d("Delete all cancelled")
-    }
 }

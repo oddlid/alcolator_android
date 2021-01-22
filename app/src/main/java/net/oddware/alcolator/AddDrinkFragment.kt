@@ -8,8 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import kotlinx.android.synthetic.main.fragment_add_drink.*
-import kotlinx.android.synthetic.main.fragment_add_drink.view.*
+import net.oddware.alcolator.databinding.FragmentAddDrinkBinding
 import timber.log.Timber
 
 class AddDrinkFragment : Fragment() {
@@ -21,39 +20,45 @@ class AddDrinkFragment : Fragment() {
     var drinkID = AddDrinkActivity.INVALID_IDX
     private var drinkObj: Drink? = null
     private lateinit var drinkViewModel: DrinkViewModel
+    private var _binding: FragmentAddDrinkBinding? = null
+
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_add_drink, container, false)
+        _binding = FragmentAddDrinkBinding.inflate(inflater, container, false)
+        val view = binding.root
 
         if (AddDrinkActivity.CFG_ACTION_ADD == cfgAction) {
             drinkObj = Drink(id = drinkID)
         }
 
-        view.btnSave.setOnClickListener {
+        binding.btnSave.setOnClickListener {
             drinkObj?.run {
                 //id = drinkID
-                tag = view.etTag.text.toString().trim()
-                name = view.etName.text.toString().trim()
+                tag = binding.etTag.text.toString().trim()
+                name = binding.etName.text.toString().trim()
 
-                val dVolumeML = view.etVol.text.toString().trim()
+                val dVolumeML = binding.etVol.text.toString().trim()
                 volumeML = if (dVolumeML.isEmpty()) {
                     0
                 } else {
                     dVolumeML.toInt()
                 }
 
-                val dAlcPct = view.etPct.text.toString().trim().replace(",", ".")
+                val dAlcPct = binding.etPct.text.toString().trim().replace(",", ".")
                 alcPct = if (dAlcPct.isEmpty()) {
                     0.0
                 } else {
                     dAlcPct.toDouble()
                 }
 
-                val dPrice = view.etPrice.text.toString().trim().replace(",", ".")
+                val dPrice = binding.etPrice.text.toString().trim().replace(",", ".")
                 price = if (dPrice.isEmpty()) {
                     0.0
                 } else {
@@ -82,11 +87,16 @@ class AddDrinkFragment : Fragment() {
             activity?.finish()
         }
 
-        view.btnCancel.setOnClickListener {
+        binding.btnCancel.setOnClickListener {
             activity?.finish()
         }
 
         return view
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -104,10 +114,10 @@ class AddDrinkFragment : Fragment() {
 
     private fun updateUI(drink: Drink?) {
         drinkObj = drink
-        etTag.setText(drink?.tag)
-        etName.setText(drink?.name)
-        etVol.setText(drink?.volumeML.toString())
-        etPct.setText(drink?.alcPct.toString())
-        etPrice.setText(drink?.price.toString())
+        binding.etTag.setText(drink?.tag)
+        binding.etName.setText(drink?.name)
+        binding.etVol.setText(drink?.volumeML.toString())
+        binding.etPct.setText(drink?.alcPct.toString())
+        binding.etPrice.setText(drink?.price.toString())
     }
 }

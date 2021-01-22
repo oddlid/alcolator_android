@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import net.oddware.alcolator.databinding.FragmentDrinkDetailBinding
 import timber.log.Timber
+import java.util.*
 
 class DrinkDetailFragment(private val drinkID: Int = DrinkDetailActivity.INVALID_ID) :
     Fragment(),
@@ -132,18 +133,24 @@ class DrinkDetailFragment(private val drinkID: Int = DrinkDetailActivity.INVALID
         }
     }
 
+    private inline fun fmtdbl(d: Double?): String? {
+        return d?.let {
+            String.format(Locale.US, "%.2f", d)
+        }
+    }
+
     private fun updateUI(d: Drink?) {
         drinkObj = d
         binding.tvIDVal.text = d?.id.toString()
         binding.tvTagVal.text = d?.tag
         binding.tvNameVal.text = d?.name
         binding.tvVolVal.text = d?.volumeML.toString()
-        binding.tvPctVal.text = d?.alcPct.toString()
-        binding.tvPriceVal.text = d?.price.toString()
-        binding.tvPricePerMLAlcVal.text = d?.pricePerAlcML().toString()
-        binding.tvPricePerMLDrinkVal.text = d?.pricePerDrinkML().toString()
-        binding.tvVolWaterVal.text = d?.waterML().toString()
-        binding.tvVolAlcVal.text = d?.alcML().toString()
+        binding.tvPctVal.text = fmtdbl(d?.alcPct)
+        binding.tvPriceVal.text = fmtdbl(d?.price)
+        binding.tvPricePerMLAlcVal.text = fmtdbl(d?.pricePerAlcML())
+        binding.tvPricePerMLDrinkVal.text = fmtdbl(d?.pricePerDrinkML())
+        binding.tvVolWaterVal.text = fmtdbl(d?.waterML())
+        binding.tvVolAlcVal.text = fmtdbl(d?.alcML())
     }
 
     override fun onPositiveClick(df: DialogFragment) {

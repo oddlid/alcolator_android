@@ -41,7 +41,8 @@ dependencies {
     //implementation "com.google.code.gson:gson:$rootProject.v_gson"
     // switching over from gson to kotlinx serialization json
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:$rootProject.v_kxsJson"
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    //implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    //implementation 'androidx.wear:wear:1.0.0'
 
     testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
@@ -50,6 +51,7 @@ dependencies {
     implementation "com.google.android.material:material:$rootProject.v_material"
 
     implementation "androidx.room:room-runtime:$rootProject.v_room"
+    //compileOnly 'com.google.android.wearable:wearable:2.6.0'
     kapt "androidx.room:room-compiler:$rootProject.v_room" // For Kotlin use kapt instead of annotationProcessor
 
     // optional - Kotlin Extensions and Coroutines support for Room
@@ -82,8 +84,8 @@ dependencies {
     // Jetpack Navigation stuff
 
     // Java language implementation
-    implementation "androidx.navigation:navigation-fragment:$rootProject.v_jetpackNav"
-    implementation "androidx.navigation:navigation-ui:$rootProject.v_jetpackNav"
+    //implementation "androidx.navigation:navigation-fragment:$rootProject.v_jetpackNav"
+    //implementation "androidx.navigation:navigation-ui:$rootProject.v_jetpackNav"
 
     // Kotlin
     implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.v_jetpackNav"

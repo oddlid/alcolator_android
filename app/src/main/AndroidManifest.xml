@@ -12,10 +12,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <!--
             Lifted this one out for when trying to implement JetPack Navigation
             android:configChanges="orientation|screenSize|screenLayout"
         -->
+        <!--
         <activity android:name=".DrinkListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,16 +33,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        -->
+        <!--
         <activity android:name=".AddDrinkActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".DrinkListActivity" />
         </activity>
+        -->
+        <!--
         <activity android:name=".DrinkDetailActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".DrinkListActivity" />
         </activity>
+        -->
     </application>
 
 </manifest>

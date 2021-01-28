@@ -47,7 +47,6 @@ class DrinkDetailFragment(private val drinkID: Int = DrinkDetailActivity.INVALID
     private var drinkObj: Drink? = null
     private lateinit var drinkViewModel: DrinkViewModel
     private var _binding: FragmentDrinkDetailBinding? = null
-
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!

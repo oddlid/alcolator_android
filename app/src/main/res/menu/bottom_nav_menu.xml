@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/bNavItemDrinkList"
+        android:id="@+id/drinkListFragment"
         android:enabled="true"
         android:icon="@drawable/ic_list"
         android:title="DrinkList" />
     <item
-        android:id="@+id/bNavItemCompareDrinks"
+        android:id="@+id/compareDrinksFragment"
         android:enabled="true"
         android:icon="@drawable/ic_compare_arrows"
         android:title="Compare drinks" />
     <item
-        android:id="@+id/bNavItemTabList"
+        android:id="@+id/tabListFragment"
         android:enabled="true"
         android:icon="@drawable/ic_receipt_long"
         android:title="Tabs" />

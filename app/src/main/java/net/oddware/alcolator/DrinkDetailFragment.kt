@@ -60,7 +60,8 @@ class DrinkDetailFragment(private val drinkID: Int = DrinkDetailActivity.INVALID
         val view = binding.root
 
         binding.btnClose.setOnClickListener {
-            activity?.finish()
+            //activity?.finish()
+            Timber.d("TODO: Remove this button, or make it pop the backstack")
         }
 
         binding.btnDelete.setOnClickListener {
@@ -76,25 +77,26 @@ class DrinkDetailFragment(private val drinkID: Int = DrinkDetailActivity.INVALID
         }
 
         binding.btnEdit.setOnClickListener {
-            context?.let {
-                drinkObj?.run {
-                    startActivityForResult(
-                        AddDrinkActivity.getLaunchIntent(
-                            it,
-                            AddDrinkActivity.CFG_ACTION_EDIT,
-                            id
-                        ),
-                        AddDrinkActivity.CFG_ACTION_EDIT
-                    )
-                    // This didn't do anything...hmmm
-                    //drinkViewModel.get(id).observe(viewLifecycleOwner, Observer {
-                    //    if (null != it) {
-                    //        updateUI(it)
-                    //    }
-                    //})
-                    //activity?.finish()
-                }
-            }
+            Timber.d("TODO: Update navigation for EDIT button")
+            //context?.let {
+            //    drinkObj?.run {
+            //        startActivityForResult(
+            //            AddDrinkActivity.getLaunchIntent(
+            //                it,
+            //                AddDrinkActivity.CFG_ACTION_EDIT,
+            //                id
+            //            ),
+            //            AddDrinkActivity.CFG_ACTION_EDIT
+            //        )
+            //        // This didn't do anything...hmmm
+            //        //drinkViewModel.get(id).observe(viewLifecycleOwner, Observer {
+            //        //    if (null != it) {
+            //        //        updateUI(it)
+            //        //    }
+            //        //})
+            //        //activity?.finish()
+            //    }
+            //}
 
             // Didn't work at all
             //view.detailRow0.background = getBorders(
@@ -156,7 +158,8 @@ class DrinkDetailFragment(private val drinkID: Int = DrinkDetailActivity.INVALID
         val d = drinkObj ?: return
         Timber.d("Deleting \"${d.name}\"")
         drinkViewModel.remove(d)
-        activity?.finish()
+        Timber.d("TODO: update navigation for delete confirmation - don't close activity!")
+        //activity?.finish()
     }
 
     override fun onNegativeClick(df: DialogFragment) {
@@ -164,6 +167,7 @@ class DrinkDetailFragment(private val drinkID: Int = DrinkDetailActivity.INVALID
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        Timber.d("TODO: See if we can replace onActivityResult with something else in new navigation")
         super.onActivityResult(requestCode, resultCode, data)
 
         when (requestCode) {

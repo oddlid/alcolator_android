@@ -1,5 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/nav_graph">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/drinkListFragment">
 
+    <fragment
+        android:id="@+id/tabListFragment"
+        android:name="net.oddware.alcolator.TabListFragment"
+        android:label="Tab List"
+        tools:layout="@layout/fragment_tablist">
+        <action
+            android:id="@+id/action_tabListFragment_to_deleteAllDialog"
+            app:destination="@id/deleteAllDialog" />
+        <action
+            android:id="@+id/action_tabListFragment_to_deleteOneDialog"
+            app:destination="@id/deleteOneDialog" />
+    </fragment>
+    <fragment
+        android:id="@+id/addDrinkFragment"
+        android:name="net.oddware.alcolator.AddDrinkFragment"
+        android:label="Add / Edit Drink"
+        tools:layout="@layout/fragment_add_drink" />
+    <fragment
+        android:id="@+id/drinkDetailFragment"
+        android:name="net.oddware.alcolator.DrinkDetailFragment"
+        android:label="Drink Details"
+        tools:layout="@layout/fragment_drink_detail">
+        <action
+            android:id="@+id/action_drinkDetailFragment_to_addDrinkFragment"
+            app:destination="@id/addDrinkFragment" />
+        <action
+            android:id="@+id/action_drinkDetailFragment_to_deleteOneDialog"
+            app:destination="@id/deleteOneDialog" />
+    </fragment>
+    <fragment
+        android:id="@+id/drinkListFragment"
+        android:name="net.oddware.alcolator.DrinkListFragment"
+        android:label="Drink List"
+        tools:layout="@layout/fragment_drink_list">
+        <action
+            android:id="@+id/action_drinkListFragment_to_addDrinkFragment"
+            app:destination="@id/addDrinkFragment" />
+        <action
+            android:id="@+id/action_drinkListFragment_to_drinkDetailFragment"
+            app:destination="@id/drinkDetailFragment" />
+        <action
+            android:id="@+id/action_drinkListFragment_to_deleteAllDialog"
+            app:destination="@id/deleteAllDialog" />
+    </fragment>
+    <fragment
+        android:id="@+id/compareDrinksFragment"
+        android:name="net.oddware.alcolator.CompareDrinksFragment"
+        android:label="Compare Drinks"
+        tools:layout="@layout/fragment_compare_drinks_alt1" />
+    <dialog
+        android:id="@+id/deleteOneDialog"
+        android:name="net.oddware.alcolator.DeleteOneDialog"
+        android:label="DeleteOneDialog" />
+    <dialog
+        android:id="@+id/deleteAllDialog"
+        android:name="net.oddware.alcolator.DeleteAllDialog"
+        android:label="DeleteAllDialog" />
 </navigation>

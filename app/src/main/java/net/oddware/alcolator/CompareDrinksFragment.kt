@@ -121,7 +121,53 @@ class CompareDrinksFragment : Fragment() {
         _binding = null
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        drinkViewModel = ViewModelProvider(this).get(DrinkViewModel::class.java)
+
+        drinkViewModel.drinks.observe(viewLifecycleOwner, { drinks ->
+            if (null != drinks) {
+                // Insert inactive header selection
+                val mdrinks = drinks.toMutableList()
+                context?.let { ctx ->
+                    mdrinks.add(
+                        0,
+                        Drink(
+                            name = ctx.getString(R.string.cmpDrinkSpnHdr),
+                            tag = "--"
+                        ) // bogus header
+                    )
+                    // Create adapter
+                    drinkAdapter = DrinkArrayAdapter(
+                        ctx,
+                        android.R.layout.simple_spinner_item,
+                        0,
+                        mdrinks
+                    ).also { it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) }
+                }
+
+                // If we would like to override a method in DrinkArrayAdapter, we could assign it
+                // like this instead of the above:
+                //drinkAdapter = object : DrinkArrayAdapter(
+                //    requireContext(),
+                //    android.R.layout.simple_spinner_item,
+                //    0,
+                //    mdrinks
+                //) {
+                //    override fun isEnabled(position: Int): Boolean {
+                //        return position != 0
+                //    }
+                //}.also { it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) }
+
+                binding.spnCmpDrink1Chooser.adapter = drinkAdapter
+                binding.spnCmpDrink2Chooser.adapter = drinkAdapter
+            }
+        })
+    }
+
+    /*
     override fun onActivityCreated(savedInstanceState: Bundle?) {
+        // DONE: Migrate to onViewCreated
         super.onActivityCreated(savedInstanceState)
 
         drinkViewModel = ViewModelProvider(this).get(DrinkViewModel::class.java)
@@ -170,6 +216,7 @@ class CompareDrinksFragment : Fragment() {
             }
         })
     }
+     */
 
     private inline fun fmtdbl(d: Double): String = String.format(Locale.US, "%.2f", d)
 

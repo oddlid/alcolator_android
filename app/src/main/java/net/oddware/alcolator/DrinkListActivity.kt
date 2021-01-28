@@ -1,24 +1,8 @@
 package net.oddware.alcolator
 
-import android.app.Activity
-import android.content.ContentResolver
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.snackbar.Snackbar
-import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 import net.oddware.alcolator.databinding.ActivityDrinkListBinding
-import timber.log.Timber
-import java.io.*
-import java.text.SimpleDateFormat
-import java.util.*
 
 /*
 TODO: 2021-01-22 01:35
@@ -28,8 +12,8 @@ TODO: 2021-01-22 01:35
  */
 
 class DrinkListActivity :
-    AppCompatActivity(),
-    DeleteAllDialog.DeleteAllDialogListener {
+    AppCompatActivity()
+/* DeleteAllDialog.DeleteAllDialogListener */ {
 
     companion object {
         const val REQ_CREATE_FILE = 1
@@ -39,17 +23,17 @@ class DrinkListActivity :
         const val TAG_COMPARE_DRINKS = "CompareDrinksFrag"
         const val TAG_TABS = "TabsFrag"
 
-        @JvmStatic
-        fun getCurrentDateISO8601String(): String {
-            return SimpleDateFormat("yyyy-MM-dd", Locale.US).format(Date())
-        }
+        //@JvmStatic
+        //fun getCurrentDateISO8601String(): String {
+        //    return SimpleDateFormat("yyyy-MM-dd", Locale.US).format(Date())
+        //}
 
-        @JvmStatic
-        val json = Json { prettyPrint = true }
+        //@JvmStatic
+        //val json = Json { prettyPrint = true }
     }
 
-    private lateinit var drinkViewModel: DrinkViewModel
-    private lateinit var cResolver: ContentResolver
+    //private lateinit var drinkViewModel: DrinkViewModel
+    //private lateinit var cResolver: ContentResolver
     private lateinit var binding: ActivityDrinkListBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,44 +42,45 @@ class DrinkListActivity :
         val view = binding.root
         setContentView(view)
 
-        with(supportFragmentManager.beginTransaction()) {
-            addToBackStack(TAG_DRINK_LIST)
-            replace(R.id.flDrinkList, DrinkListFragment())
-            commit()
-        }
+        // This class will not be used anymore after migration to new navigation
+        //with(supportFragmentManager.beginTransaction()) {
+        //    addToBackStack(TAG_DRINK_LIST)
+        //    replace(R.id.flDrinkList, DrinkListFragment())
+        //    commit()
+        //}
 
-        drinkViewModel = ViewModelProvider(this).get(DrinkViewModel::class.java)
-        cResolver = applicationContext.contentResolver
+        //drinkViewModel = ViewModelProvider(this).get(DrinkViewModel::class.java)
+        //cResolver = applicationContext.contentResolver
 
-        binding.bottomNav.setOnNavigationItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.bNavItemDrinkList -> {
-                    with(supportFragmentManager.beginTransaction()) {
-                        addToBackStack(TAG_DRINK_LIST)
-                        replace(R.id.flDrinkList, DrinkListFragment())
-                        commit()
-                    }
-                    true
-                }
-                R.id.bNavItemCompareDrinks -> {
-                    with(supportFragmentManager.beginTransaction()) {
-                        addToBackStack(TAG_COMPARE_DRINKS)
-                        replace(R.id.flDrinkList, CompareDrinksFragment())
-                        commit()
-                    }
-                    true
-                }
-                R.id.bNavItemTabList -> {
-                    with(supportFragmentManager.beginTransaction()) {
-                        addToBackStack(TAG_TABS)
-                        replace(R.id.flDrinkList, TabListFragment())
-                        commit()
-                    }
-                    true
-                }
-                else -> true
-            }
-        }
+        //binding.bottomNav.setOnNavigationItemSelectedListener { item ->
+        //    when (item.itemId) {
+        //        R.id.bNavItemDrinkList -> {
+        //            with(supportFragmentManager.beginTransaction()) {
+        //                addToBackStack(TAG_DRINK_LIST)
+        //                replace(R.id.flDrinkList, DrinkListFragment())
+        //                commit()
+        //            }
+        //            true
+        //        }
+        //        R.id.bNavItemCompareDrinks -> {
+        //            with(supportFragmentManager.beginTransaction()) {
+        //                addToBackStack(TAG_COMPARE_DRINKS)
+        //                replace(R.id.flDrinkList, CompareDrinksFragment())
+        //                commit()
+        //            }
+        //            true
+        //        }
+        //        R.id.bNavItemTabList -> {
+        //            with(supportFragmentManager.beginTransaction()) {
+        //                addToBackStack(TAG_TABS)
+        //                replace(R.id.flDrinkList, TabListFragment())
+        //                commit()
+        //            }
+        //            true
+        //        }
+        //        else -> true
+        //    }
+        //}
         //bottomNav.selectedItemId = R.id.bNavItemDrinkList
 
         /*
@@ -105,11 +90,14 @@ class DrinkListActivity :
          */
     }
 
+    /*
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.action_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
+     */
 
+    /*
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_delete_all -> {
@@ -149,6 +137,9 @@ class DrinkListActivity :
         return super.onOptionsItemSelected(item)
     }
 
+     */
+
+    /*
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -180,15 +171,24 @@ class DrinkListActivity :
         }
     }
 
+     */
+
+    /*
     override fun onPositiveClick(df: DialogFragment) {
         Timber.d("Deleting all drinks from DB...")
         drinkViewModel.clear()
     }
 
+     */
+
+    /*
     override fun onNegativeClick(df: DialogFragment) {
         Timber.d("Delete all cancelled")
     }
 
+     */
+
+    /*
     private fun createFile() {
         val intent = Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
             addCategory(Intent.CATEGORY_OPENABLE)
@@ -201,6 +201,9 @@ class DrinkListActivity :
         startActivityForResult(intent, REQ_CREATE_FILE)
     }
 
+     */
+
+    /*
     private fun openFile() {
         val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
             addCategory(Intent.CATEGORY_OPENABLE)
@@ -209,6 +212,9 @@ class DrinkListActivity :
         startActivityForResult(intent, REQ_OPEN_FILE)
     }
 
+     */
+
+    /*
     @Throws(IOException::class)
     private fun writeBackup(uri: Uri): Boolean {
         val drinks = drinkViewModel.drinks.value ?: return false
@@ -222,6 +228,9 @@ class DrinkListActivity :
         return true
     }
 
+     */
+
+    /*
     @Throws(IOException::class)
     private fun readBackup(uri: Uri): String {
         val sb = StringBuilder()
@@ -237,6 +246,9 @@ class DrinkListActivity :
         return sb.toString()
     }
 
+     */
+
+    /*
     private fun restoreBackup(uri: Uri): Boolean {
         val jsonData = readBackup(uri)
         if (jsonData.isEmpty()) {
@@ -255,6 +267,9 @@ class DrinkListActivity :
         return true
     }
 
+     */
+
+    /*
     private fun showMessage(msg: String) {
         Snackbar.make(
             findViewById(R.id.flDrinkList),
@@ -262,5 +277,7 @@ class DrinkListActivity :
             Snackbar.LENGTH_LONG
         ).show()
     }
+
+     */
 
 }

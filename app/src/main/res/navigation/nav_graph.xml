@@ -18,21 +18,37 @@
             app:destination="@id/deleteOneDialog" />
     </fragment>
     <fragment
-        android:id="@+id/addDrinkFragment"
-        android:name="net.oddware.alcolator.AddDrinkFragment"
+        android:id="@+id/editDrinkFragment"
+        android:name="net.oddware.alcolator.EditDrinkFragment"
         android:label="Add / Edit Drink"
-        tools:layout="@layout/fragment_add_drink" />
+        tools:layout="@layout/fragment_edit_drink">
+        <argument
+            android:name="drinkID"
+            android:defaultValue="-1"
+            app:argType="integer" />
+        <argument
+            android:name="loadAction"
+            android:defaultValue="-1"
+            app:argType="integer" />
+    </fragment>
     <fragment
         android:id="@+id/drinkDetailFragment"
         android:name="net.oddware.alcolator.DrinkDetailFragment"
         android:label="Drink Details"
         tools:layout="@layout/fragment_drink_detail">
         <action
-            android:id="@+id/action_drinkDetailFragment_to_addDrinkFragment"
-            app:destination="@id/addDrinkFragment" />
+            android:id="@+id/action_drinkDetailFragment_to_editDrinkFragment"
+            app:destination="@id/editDrinkFragment" />
         <action
             android:id="@+id/action_drinkDetailFragment_to_deleteOneDialog"
             app:destination="@id/deleteOneDialog" />
+        <argument
+            android:name="drinkID"
+            android:defaultValue="-1"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_drinkDetailFragment_to_drinkListFragment"
+            app:destination="@id/drinkListFragment" />
     </fragment>
     <fragment
         android:id="@+id/drinkListFragment"
@@ -40,14 +56,17 @@
         android:label="Drink List"
         tools:layout="@layout/fragment_drink_list">
         <action
-            android:id="@+id/action_drinkListFragment_to_addDrinkFragment"
-            app:destination="@id/addDrinkFragment" />
+            android:id="@+id/action_drinkListFragment_to_editDrinkFragment"
+            app:destination="@id/editDrinkFragment" />
         <action
             android:id="@+id/action_drinkListFragment_to_drinkDetailFragment"
             app:destination="@id/drinkDetailFragment" />
         <action
             android:id="@+id/action_drinkListFragment_to_deleteAllDialog"
             app:destination="@id/deleteAllDialog" />
+        <action
+            android:id="@+id/action_drinkListFragment_to_tagListFragment"
+            app:destination="@id/tagListFragment" />
     </fragment>
     <fragment
         android:id="@+id/compareDrinksFragment"
@@ -57,9 +76,36 @@
     <dialog
         android:id="@+id/deleteOneDialog"
         android:name="net.oddware.alcolator.DeleteOneDialog"
-        android:label="DeleteOneDialog" />
+        android:label="DeleteOneDialog">
+        <argument
+            android:name="deleteItemName"
+            android:defaultValue="UNDEFINED"
+            app:argType="string"
+            app:nullable="false" />
+        <action
+            android:id="@+id/action_deleteOneDialog_to_drinkListFragment"
+            app:destination="@id/drinkListFragment" />
+        <action
+            android:id="@+id/action_deleteOneDialog_to_tabListFragment"
+            app:destination="@id/tabListFragment" />
+    </dialog>
     <dialog
         android:id="@+id/deleteAllDialog"
         android:name="net.oddware.alcolator.DeleteAllDialog"
-        android:label="DeleteAllDialog" />
+        android:label="DeleteAllDialog">
+        <action
+            android:id="@+id/action_deleteAllDialog_to_drinkListFragment"
+            app:destination="@id/drinkListFragment" />
+        <action
+            android:id="@+id/action_deleteAllDialog_to_tabListFragment"
+            app:destination="@id/tabListFragment" />
+    </dialog>
+    <dialog
+        android:id="@+id/tagListFragment"
+        android:name="net.oddware.alcolator.TagListFragment"
+        android:label="TagListFragment">
+        <action
+            android:id="@+id/action_tagListFragment_to_drinkListFragment"
+            app:destination="@id/drinkListFragment" />
+    </dialog>
 </navigation>

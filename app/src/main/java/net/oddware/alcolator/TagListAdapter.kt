@@ -3,31 +3,21 @@ package net.oddware.alcolator
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import net.oddware.alcolator.databinding.TagListItemBinding
 
 class TagListAdapter(
     private val tagList: List<String>,
-    private val listener: TagListFragment.TagSelectionListener
+    private val navCtl: NavController
 ) : RecyclerView.Adapter<TagListAdapter.TagViewHolder>() {
-    //private var _binding: TagListItemBinding? = null
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    //private val binding = _binding!!
 
     inner class TagViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        //val tv: TextView = itemView.tvTagItem
         val binding = TagListItemBinding.bind(itemView)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TagViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(viewType, parent, false)
-
-        // set listener etc
-        //vh.tv.setOnClickListener {
-        //    Timber.d("Tag clicked: $it")
-        //    listener.onSelectTag(it.toString())
-        //}
 
         return TagViewHolder(view)
     }
@@ -44,7 +34,16 @@ class TagListAdapter(
         with(holder) {
             binding.tvTagItem.text = tagList[position]
             binding.tvTagItem.setOnClickListener {
-                listener.onSelectTag(binding.tvTagItem.text.toString())
+                //listener.onSelectTag(binding.tvTagItem.text.toString())
+                val action = TagListFragmentDirections.actionTagListFragmentToDrinkListFragment()
+
+                // Set result before returning
+                navCtl.previousBackStackEntry?.savedStateHandle?.set(
+                    TagListFragment.FILTER_TAG_KEY,
+                    binding.tvTagItem.text.toString()
+                )
+
+                navCtl.navigate(action)
             }
         }
     }

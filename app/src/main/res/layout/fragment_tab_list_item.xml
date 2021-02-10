@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvTabListItemHdr"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/lbl_def_margin"
+        android:layout_marginTop="@dimen/lbl_def_margin"
+        android:layout_marginEnd="@dimen/lbl_def_margin"
+        android:gravity="end"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="OT @ 2021-02-10" />
+
+    <TextView
+        android:id="@+id/tvTabListItemTotalItemsLbl"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/lbl_def_margin"
+        android:layout_marginTop="@dimen/lbl_def_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTabListItemHdr"
+        tools:text="Items:" />
+
+    <TextView
+        android:id="@+id/tvTabListItemTotalItemsVal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/lbl_def_margin_bottom"
+        android:layout_marginTop="@dimen/lbl_def_margin"
+        app:layout_constraintStart_toEndOf="@id/tvTabListItemTotalItemsLbl"
+        app:layout_constraintTop_toBottomOf="@id/tvTabListItemHdr"
+        tools:text="12" />
+
+    <TextView
+        android:id="@+id/tvTabListItemAlcLbl"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/lbl_def_margin"
+        android:layout_marginTop="@dimen/lbl_def_margin"
+        app:layout_constraintStart_toEndOf="@id/tvTabListItemTotalItemsVal"
+        app:layout_constraintTop_toBottomOf="@id/tvTabListItemHdr"
+        tools:text="Alcohol (ml):" />
+
+    <TextView
+        android:id="@+id/tvTabListItemAlcVal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/lbl_def_margin_bottom"
+        android:layout_marginTop="@dimen/lbl_def_margin"
+        app:layout_constraintStart_toEndOf="@id/tvTabListItemAlcLbl"
+        app:layout_constraintTop_toBottomOf="@id/tvTabListItemHdr"
+        tools:text="482" />
+
+    <TextView
+        android:id="@+id/tvTabListItemSumLbl"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/lbl_def_margin"
+        android:layout_marginEnd="@dimen/lbl_def_margin_bottom"
+        app:layout_constraintEnd_toStartOf="@id/tvTabListItemSumVal"
+        app:layout_constraintTop_toBottomOf="@id/tvTabListItemHdr"
+        tools:text="Sum:" />
+
+    <TextView
+        android:id="@+id/tvTabListItemSumVal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/lbl_def_margin"
+        android:layout_marginEnd="@dimen/lbl_def_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTabListItemHdr"
+        tools:text="666" />
+</androidx.constraintlayout.widget.ConstraintLayout>

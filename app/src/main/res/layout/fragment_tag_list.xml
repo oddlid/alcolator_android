@@ -12,9 +12,15 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/lbl_def_margin"
         android:gravity="center_horizontal"
+        android:text="@string/dlgTagList_tvTagListHdrLblTxt"
         android:textSize="18sp"
-        android:textStyle="bold"
-        android:text="@string/dlgTagList_tvTagListHdrLblTxt" />
+        android:textStyle="bold" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="@dimen/lbl_def_margin_bottom"
+        android:background="@color/colorPrimaryDark" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvTagList"
@@ -31,7 +37,7 @@
 
         <Button
             android:id="@+id/btnTagListReset"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/dlgTagList_btnResetTxt" />
     </LinearLayout>

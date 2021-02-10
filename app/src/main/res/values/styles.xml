@@ -7,6 +7,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textViewStyle">@style/AppTheme.TextViewStyle</item>
+        <item name="android:listDivider">@drawable/list_divider</item>
     </style>
 
     <style name="AppTheme.TextViewStyle" parent="@android:style/Widget.Material.TextView">

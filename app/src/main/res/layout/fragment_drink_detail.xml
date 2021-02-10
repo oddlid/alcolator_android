@@ -212,11 +212,13 @@
                     android:layout_marginEnd="@dimen/lbl_def_margin"
                     android:text="@string/det_btnDeleteTxt" />
 
+                <!--
                 <Button
                     android:id="@+id/btnClose"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/det_btnCloseTxt" />
+                -->
 
             </LinearLayout>
 

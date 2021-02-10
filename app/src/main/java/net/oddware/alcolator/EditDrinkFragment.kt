@@ -1,41 +1,43 @@
 package net.oddware.alcolator
 
-import android.app.Activity.RESULT_OK
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import net.oddware.alcolator.databinding.FragmentAddDrinkBinding
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.navArgs
+import net.oddware.alcolator.databinding.FragmentEditDrinkBinding
 import timber.log.Timber
 
-class AddDrinkFragment : Fragment() {
-    //companion object {
-    //    const val REQ_ADD = 0xADD
-    //}
+class EditDrinkFragment : Fragment() {
+    companion object {
+        const val ACTION_ADD = 0xADD
+        const val ACTION_EDIT = 0xED1
+    }
 
-    var cfgAction = AddDrinkActivity.CFG_ACTION_ADD
-    var drinkID = AddDrinkActivity.INVALID_IDX
     private var drinkObj: Drink? = null
-    private lateinit var drinkViewModel: DrinkViewModel
-    private var _binding: FragmentAddDrinkBinding? = null
+
+    private val drinkViewModel: DrinkViewModel by activityViewModels()
+    private var _binding: FragmentEditDrinkBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+
+    private val args: EditDrinkFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentAddDrinkBinding.inflate(inflater, container, false)
+        _binding = FragmentEditDrinkBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        if (AddDrinkActivity.CFG_ACTION_ADD == cfgAction) {
-            drinkObj = Drink(id = drinkID)
+        if (ACTION_ADD == args.loadAction) {
+            drinkObj = Drink()
         }
 
         binding.btnSave.setOnClickListener {
@@ -65,30 +67,22 @@ class AddDrinkFragment : Fragment() {
                     dPrice.toDouble()
                 }
             }
-            activity?.setResult(
-                RESULT_OK,
-                Intent().apply {
-                    putExtra(AddDrinkActivity.DRINK_CFG_ID, drinkID)
-                }
-            )
 
-            when (cfgAction) {
-                AddDrinkActivity.CFG_ACTION_ADD -> {
+            when (args.loadAction) {
+                ACTION_ADD -> {
                     Timber.d("Saving new drink")
                     drinkObj?.run { drinkViewModel.add(this) }
                 }
-                AddDrinkActivity.CFG_ACTION_EDIT -> {
+                ACTION_EDIT -> {
                     Timber.d("Saving existing drink")
                     drinkObj?.run { drinkViewModel.update(this) }
                 }
                 else -> Timber.e("Invalid code for save")
             }
 
-            activity?.finish()
-        }
-
-        binding.btnCancel.setOnClickListener {
-            activity?.finish()
+            Navigation.findNavController(view)
+                .navigateUp() // weird that this works fine here, but not from DrinkDetailFragment...
+            //Navigation.findNavController(view).popBackStack() // does not work any better
         }
 
         return view
@@ -99,14 +93,13 @@ class AddDrinkFragment : Fragment() {
         _binding = null
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        drinkViewModel = ViewModelProvider(this).get(DrinkViewModel::class.java)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        if (AddDrinkActivity.CFG_ACTION_EDIT == cfgAction) {
-            drinkViewModel.get(drinkID).observe(viewLifecycleOwner, {
-                if (null != it) {
-                    updateUI(it)
+        if (ACTION_EDIT == args.loadAction) {
+            drinkViewModel.get(args.drinkID).observe(viewLifecycleOwner, { drink ->
+                if (null != drink) {
+                    updateUI(drink)
                 }
             })
         }

@@ -123,13 +123,16 @@
                 android:layout_marginTop="@dimen/lbl_def_margin"
                 android:layout_marginEnd="@dimen/lbl_def_margin">
 
+                <!--
                 <Button
                     android:id="@+id/btnCancel"
                     android:text="@string/frmAdd_btnCancelTxt"
                     tools:text="Cancel" />
+                -->
 
                 <Button
                     android:id="@+id/btnSave"
+                    android:layout_column="1"
                     android:text="@string/frmAdd_btnAddTxt"
                     tools:text="Save" />
             </TableRow>

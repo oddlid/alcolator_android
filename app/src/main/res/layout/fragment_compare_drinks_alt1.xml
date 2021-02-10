@@ -173,78 +173,144 @@
 
                 </TableRow>
 
-                <!--
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="@dimen/lbl_def_margin"
+                        android:layout_marginBottom="@dimen/lbl_def_margin"
+                        android:layout_span="3"
+                        android:background="@color/iconColor" />
+                </TableRow>
+
                 <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/tvCmpDrink1PricePMLALbl"
-                        android:layout_marginEnd="@dimen/lbl_def_margin"
-                        android:layout_marginBottom="@dimen/lbl_def_margin_bottom"
-                        android:text="@string/cmpDrink1PricePMLALbl"
-                        tools:text="Price per ml alcohol:" />
+                        android:id="@+id/tvCmpManualHdr"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/lbl_def_margin"
+                        android:layout_span="3"
+                        android:gravity="center_horizontal"
+                        android:text="@string/cmpDrinksManualHdr"
+                        android:textAppearance="@android:style/TextAppearance.Material.Large" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/tvCmpDrink1PricePMLAVal"
-                        tools:text="69.0" />
+                        android:layout_column="1"
+                        android:gravity="end"
+                        android:text="@string/cmpDrink1Hdr" />
+
+                    <TextView
+                        android:layout_column="2"
+                        android:gravity="end"
+                        android:text="@string/cmpDrink2Hdr" />
 
                 </TableRow>
-                -->
 
-                <!--
                 <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <TextView
-                        android:id="@+id/tvCmpDrink2NameLbl"
-                        android:layout_marginEnd="@dimen/lbl_def_margin"
-                        android:layout_marginBottom="@dimen/lbl_def_margin_bottom"
-                        android:text="@string/cmpDrink2NameLbl"
-                        tools:text="Drink:" />
+                    <TextView android:text="@string/cmpDrink1PctLbl" />
 
-                    <Spinner
-                        android:id="@+id/spnCmpDrink2Chooser"
+                    <EditText
+                        android:id="@+id/etCmpDrinkManD1PctVal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:entries="@array/bogusDrinks"
-                        tools:text="List of drinks" />
-
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/tvCmpDrink2AmountLbl"
-                        android:layout_marginEnd="@dimen/lbl_def_margin"
-                        android:layout_marginBottom="@dimen/lbl_def_margin_bottom"
-                        android:text="@string/cmpDrink2AmountLbl"
-                        tools:text="Amount:" />
-
-                    <TextView
-                        android:id="@+id/tvCmpDrink2AmountVal"
-                        tools:text="2.3 X 40 ml" />
-
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/tvCmpDrink2PctLbl"
-                        android:layout_marginEnd="@dimen/lbl_def_margin"
-                        android:layout_marginBottom="@dimen/lbl_def_margin_bottom"
-                        android:text="@string/cmpDrink2PctLbl"
-                        tools:text="Percentage:" />
-
-                    <TextView
-                        android:id="@+id/tvCmpDrink2PctVal"
+                        android:gravity="end"
+                        android:inputType="numberDecimal"
+                        android:selectAllOnFocus="true"
                         tools:text="6.4" />
 
+                    <EditText
+                        android:id="@+id/etCmpDrinkManD2PctVal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:inputType="numberDecimal"
+                        android:selectAllOnFocus="true"
+                        tools:text="6.4" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView android:text="@string/cmpDrink1VolLbl" />
+
+                    <EditText
+                        android:id="@+id/etCmpDrinkManD1VolVal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:digits="0123456789"
+                        android:gravity="end"
+                        android:inputType="none|number"
+                        android:selectAllOnFocus="true"
+                        tools:text="500" />
+
+                    <EditText
+                        android:id="@+id/etCmpDrinkManD2VolVal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:digits="0123456789"
+                        android:gravity="end"
+                        android:inputType="none|number"
+                        android:selectAllOnFocus="true"
+                        tools:text="500" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView android:text="@string/cmpDrink1PriceLbl" />
+
+                    <EditText
+                        android:id="@+id/etCmpDrinkManD1PriceVal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:digits="0123456789"
+                        android:gravity="end"
+                        android:inputType="none|number"
+                        android:selectAllOnFocus="true"
+                        tools:text="69" />
+
+                    <EditText
+                        android:id="@+id/etCmpDrinkManD2PriceVal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:digits="0123456789"
+                        android:gravity="end"
+                        android:inputType="none|number"
+                        android:selectAllOnFocus="true"
+                        tools:text="69" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_column="1"
+                        android:gravity="end"
+                        android:orientation="horizontal">
+
+                        <ImageButton
+                            android:id="@+id/btnCmpDrinkSwap"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_swap" />
+                    </LinearLayout>
                 </TableRow>
 
                 <TableRow
@@ -252,16 +318,10 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/tvCmpDrink2VolLbl"
-                        android:layout_marginEnd="@dimen/lbl_def_margin"
-                        android:layout_marginBottom="@dimen/lbl_def_margin_bottom"
-                        android:text="@string/cmpDrink2VolLbl"
-                        tools:text="Total volume (ml):" />
-
-                    <TextView
-                        android:id="@+id/tvCmpDrink2VolVal"
-                        tools:text="XXX ml" />
-
+                        android:layout_column="1"
+                        android:gravity="end"
+                        android:text="@string/cmpDrinkSepLbl"
+                        android:textAppearance="@android:style/TextAppearance.Material.Large" />
                 </TableRow>
 
                 <TableRow
@@ -269,16 +329,31 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/tvCmpDrink2AlcVolLbl"
-                        android:layout_marginEnd="@dimen/lbl_def_margin"
-                        android:layout_marginBottom="@dimen/lbl_def_margin_bottom"
-                        android:text="@string/cmpDrink2AlcVolLbl"
-                        tools:text="Alcohol volume (ml):" />
+                        android:layout_column="1"
+                        android:gravity="end"
+                        android:text="@string/cmpDrink1VolLbl" />
 
                     <TextView
-                        android:id="@+id/tvCmpDrink2AlcVolVal"
+                        android:id="@+id/tvCmpDrinkManVolVal"
+                        android:layout_column="2"
+                        android:gravity="end"
+                        tools:text="500" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_column="1"
+                        android:gravity="end"
+                        android:text="@string/cmpDrink1AlcVolLbl" />
+
+                    <TextView
+                        android:id="@+id/tvCmpDrinkManAlcVal"
+                        android:layout_column="2"
+                        android:gravity="end"
                         tools:text="32" />
-
                 </TableRow>
 
                 <TableRow
@@ -286,39 +361,50 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/tvCmpDrink2PriceLbl"
-                        android:layout_marginEnd="@dimen/lbl_def_margin"
-                        android:layout_marginBottom="@dimen/lbl_def_margin_bottom"
-                        android:text="@string/cmpDrink2PriceLbl"
-                        tools:text="Price:" />
+                        android:layout_column="1"
+                        android:gravity="end"
+                        android:text="@string/cmpDrink1PriceLbl" />
 
                     <TextView
-                        android:id="@+id/tvCmpDrink2PriceVal"
-                        tools:text="XXX" />
-
+                        android:id="@+id/tvCmpDrinkManPriceVal"
+                        android:layout_column="2"
+                        android:gravity="end"
+                        tools:text="69" />
                 </TableRow>
 
                 <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <TextView
-                        android:id="@+id/tvCmpDrink2PricePMLALbl"
-                        android:layout_marginEnd="@dimen/lbl_def_margin"
-                        android:layout_marginBottom="@dimen/lbl_def_margin_bottom"
-                        android:text="@string/cmpDrink2PricePMLALbl"
-                        tools:text="Price per ml alcohol:" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="@dimen/lbl_def_margin"
+                        android:layout_marginBottom="@dimen/lbl_def_margin"
+                        android:layout_span="3"
+                        android:background="@color/iconColor" />
+                </TableRow>
 
-                    <TextView
-                        android:id="@+id/tvCmpDrink2PricePMLAVal"
-                        tools:text="69.0" />
+                <!--
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
+                    <Button
+                        android:id="@+id/btnCmpDrinkClear"
+                        android:layout_column="1"
+                        android:text="@string/cmpDrinkBtnClearLbl" />
+
+                    <Button
+                        android:id="@+id/btnCmpDrinkCalc"
+                        android:layout_column="2"
+                        android:text="@string/cmpDrinkSepLbl" />
                 </TableRow>
                 -->
 
             </TableLayout>
-
         </LinearLayout>
     </HorizontalScrollView>
+
 
 </ScrollView>

@@ -32,7 +32,11 @@
     <string name="menu_backupTxt">Export backup</string>
     <string name="menu_restoreTxt">Import backup</string>
     <string name="act_DrinkDetailsTitle">Drink details</string>
-    <string name="cmpDrinksHdr">Compare Alcohol Content</string>
+    <string name="cmpDrinksHdr">Compare From List</string>
+    <string name="cmpDrinksManualHdr">Compare Manually</string>
+    <string name="cmpDrink1Hdr">Drink #1</string>
+    <string name="cmpDrink2Hdr">Drink #2</string>
+    <string name="cmpDrinkBtnClearLbl">Clear</string>
     <string name="cmpDrink1NameLbl">Drinks:</string>
     <string name="cmpDrink1VolLbl">Vol (ml):</string>
     <string name="cmpDrink1AlcVolLbl">Alc (ml):</string>

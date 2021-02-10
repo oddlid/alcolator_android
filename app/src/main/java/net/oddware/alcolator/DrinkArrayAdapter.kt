@@ -74,6 +74,12 @@ open class DrinkArrayAdapter(
         }
     }
 
+    // Might no be needed, if we figure out the orientation change problem
+    fun update(drinks: MutableList<Drink>) {
+        clear()
+        addAll(drinks)
+    }
+
     // TODO: think through if this is how we want it
     // We could subclass and override from call site instead
     //override fun isEnabled(position: Int): Boolean {

@@ -1,21 +1,18 @@
 package net.oddware.alcolator
 
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.navArgs
 import net.oddware.alcolator.databinding.FragmentDrinkDetailBinding
 import timber.log.Timber
 import java.util.*
 
-class DrinkDetailFragment(private val drinkID: Int = DrinkDetailActivity.INVALID_ID) :
-    Fragment(),
-    DeleteOneDialog.DeleteOneDialogListener {
+class DrinkDetailFragment() : Fragment() {
 
     //companion object {
     //    // This didn't work at all
@@ -44,12 +41,19 @@ class DrinkDetailFragment(private val drinkID: Int = DrinkDetailActivity.INVALID
     //    }
     //}
 
+    companion object {
+        const val INVALID_ID = -1
+    }
+
     private var drinkObj: Drink? = null
-    private lateinit var drinkViewModel: DrinkViewModel
+    private val drinkViewModel: DrinkViewModel by activityViewModels()
     private var _binding: FragmentDrinkDetailBinding? = null
+
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+
+    private val args: DrinkDetailFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -59,57 +63,41 @@ class DrinkDetailFragment(private val drinkID: Int = DrinkDetailActivity.INVALID
         _binding = FragmentDrinkDetailBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        binding.btnClose.setOnClickListener {
-            //activity?.finish()
-            Timber.d("TODO: Remove this button, or make it pop the backstack")
-        }
-
         binding.btnDelete.setOnClickListener {
-            Timber.d("Delete clicked, checking for Fragment Manager...")
-            val fm = activity?.supportFragmentManager ?: return@setOnClickListener
-            Timber.d("We have a Fragment Manager...")
-            val dod = DeleteOneDialog()
-            dod.arguments = Bundle().apply {
-                putString(DeleteOneDialog.DRINK_NAME, drinkObj?.name)
+            drinkObj?.run {
+                val navCtl = Navigation.findNavController(view)
+                val action =
+                    DrinkDetailFragmentDirections.actionDrinkDetailFragmentToDeleteOneDialog()
+                action.deleteItemName = name
+
+                // Important to set up listening BEFORE navigate()!
+                navCtl.currentBackStackEntry?.savedStateHandle?.let { hnd ->
+                    hnd.getLiveData<String>(DeleteOneDialog.DELETE_ITEM_ACTION_KEY)
+                        .observe(viewLifecycleOwner, {
+                            if (DeleteOneDialog.DELETE_ITEM_ACTION_VAL_OK == it) {
+                                drinkViewModel.remove(this)
+                                val action2 =
+                                    DeleteOneDialogDirections.actionDeleteOneDialogToDrinkListFragment()
+                                navCtl.navigate(action2) // Works well!
+                            }
+                            hnd.remove<String>(DeleteOneDialog.DELETE_ITEM_ACTION_KEY)
+                        })
+                }
+
+                navCtl.navigate(action)
             }
-            dod.listener = this
-            dod.show(fm, "ConfirmDeleteOne")
         }
 
         binding.btnEdit.setOnClickListener {
-            Timber.d("TODO: Update navigation for EDIT button")
-            //context?.let {
-            //    drinkObj?.run {
-            //        startActivityForResult(
-            //            AddDrinkActivity.getLaunchIntent(
-            //                it,
-            //                AddDrinkActivity.CFG_ACTION_EDIT,
-            //                id
-            //            ),
-            //            AddDrinkActivity.CFG_ACTION_EDIT
-            //        )
-            //        // This didn't do anything...hmmm
-            //        //drinkViewModel.get(id).observe(viewLifecycleOwner, Observer {
-            //        //    if (null != it) {
-            //        //        updateUI(it)
-            //        //    }
-            //        //})
-            //        //activity?.finish()
-            //    }
-            //}
-
-            // Didn't work at all
-            //view.detailRow0.background = getBorders(
-            //    Color.TRANSPARENT,
-            //    Color.RED,
-            //    0,
-            //    0,
-            //    0,
-            //    2
-            //)
+            drinkObj?.run {
+                val action =
+                    DrinkDetailFragmentDirections.actionDrinkDetailFragmentToEditDrinkFragment()
+                action.loadAction = EditDrinkFragment.ACTION_EDIT
+                action.drinkID = id
+                Navigation.findNavController(view).navigate(action)
+            }
         }
 
-        Timber.d("DrinkDetailFragment created")
         return view
     }
 
@@ -118,19 +106,18 @@ class DrinkDetailFragment(private val drinkID: Int = DrinkDetailActivity.INVALID
         _binding = null
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        drinkViewModel = ViewModelProvider(this).get(DrinkViewModel::class.java)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        if (DrinkDetailActivity.INVALID_ID != drinkID) {
-            Timber.d("Loading drink with id $drinkID")
-            drinkViewModel.get(drinkID).observe(viewLifecycleOwner, {
-                if (null != it) {
-                    updateUI(it)
+        if (INVALID_ID != args.drinkID) {
+            Timber.d("Loading drink with ID ${args.drinkID}")
+            drinkViewModel.get(args.drinkID).observe(viewLifecycleOwner, { drink ->
+                if (null != drink) {
+                    updateUI(drink)
                 }
             })
         } else {
-            Timber.e("Got invalid drink ID (${DrinkDetailActivity.INVALID_ID})")
+            Timber.e("Got invalid drink ID: $INVALID_ID")
         }
     }
 
@@ -152,42 +139,5 @@ class DrinkDetailFragment(private val drinkID: Int = DrinkDetailActivity.INVALID
         binding.tvPricePerMLDrinkVal.text = fmtdbl(d?.pricePerDrinkML())
         binding.tvVolWaterVal.text = fmtdbl(d?.waterML())
         binding.tvVolAlcVal.text = fmtdbl(d?.alcML())
-    }
-
-    override fun onPositiveClick(df: DialogFragment) {
-        val d = drinkObj ?: return
-        Timber.d("Deleting \"${d.name}\"")
-        drinkViewModel.remove(d)
-        Timber.d("TODO: update navigation for delete confirmation - don't close activity!")
-        //activity?.finish()
-    }
-
-    override fun onNegativeClick(df: DialogFragment) {
-        Timber.d("Delete cancelled")
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        Timber.d("TODO: See if we can replace onActivityResult with something else in new navigation")
-        super.onActivityResult(requestCode, resultCode, data)
-
-        when (requestCode) {
-            AddDrinkActivity.CFG_ACTION_EDIT -> {
-                if (Activity.RESULT_OK == resultCode) {
-                    data?.run {
-                        val drinkID = getIntExtra(
-                            AddDrinkActivity.DRINK_CFG_ID,
-                            DrinkDetailActivity.INVALID_ID
-                        )
-                        if (DrinkDetailActivity.INVALID_ID != drinkID) {
-                            drinkViewModel.get(drinkID).observe(viewLifecycleOwner, {
-                                if (null != it) {
-                                    updateUI(it)
-                                }
-                            })
-                        }
-                    }
-                }
-            }
-        }
     }
 }

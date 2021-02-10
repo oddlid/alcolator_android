@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import net.oddware.alcolator.databinding.ActivityDrinkListBinding
 
 /*
-TODO: 2021-01-22 01:35
+IRRELEVANT: 2021-01-22 01:35
   The drink list gets fucked up when rotating, if a filter is applied before rotation.
   It will then only have filtered values as its entire list, so clearing the filter or selecting
   another tag will not work. Don't yet know how to fix this.
@@ -41,6 +41,8 @@ class DrinkListActivity :
         binding = ActivityDrinkListBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        //Navigation.findNavController(view).addOnDestinationChangedListener(this)
 
         // This class will not be used anymore after migration to new navigation
         //with(supportFragmentManager.beginTransaction()) {
@@ -84,11 +86,48 @@ class DrinkListActivity :
         //bottomNav.selectedItemId = R.id.bNavItemDrinkList
 
         /*
-        TODO: Find out how to keep the shown list (drinklist or tablist) after rotation. As it is now,
+        IRRELEVANT: Find out how to keep the shown list (drinklist or tablist) after rotation. As it is now,
               rotation will cause the drinklist to be loaded, but the selection stays on tablist if
               that was the current page before rotation.
          */
     }
+
+    /*
+    override fun onDestroy() {
+        super.onDestroy()
+        findNavController(R.id.nav_host_fragment).removeOnDestinationChangedListener(this)
+    }
+
+     */
+
+    // These methods to hide keyboard only works sometimes. But not when I want them to, which is
+    // after adding a drink and going back to DrinkListFragment, or otherwise when going to just
+    // that fragment.
+    /*
+    override fun onDestinationChanged(
+        controller: NavController,
+        destination: NavDestination,
+        arguments: Bundle?
+    ) {
+        //currentFocus?.hideKeyboard()
+        // The updated variant below did not make any difference
+        if (null == currentFocus) {
+            val view = View(this)
+            view.hideKeyboard()
+        } else {
+            currentFocus?.hideKeyboard()
+        }
+    }
+
+     */
+
+    /*
+    private fun View.hideKeyboard() {
+        val imm = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(windowToken, 0)
+    }
+
+     */
 
     /*
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -103,7 +142,7 @@ class DrinkListActivity :
             R.id.action_delete_all -> {
                 // After adding the bottom nav, this is now very important, so that we don't try
                 // to delete the drinklist if we're on the tab page.
-                // TODO: We should rather switch the action of the delete menu item to delete tabs if
+                // IRRELEVANT: We should rather switch the action of the delete menu item to delete tabs if
                 //  that's the current page
                 Timber.d("Current page: ${binding.bottomNav.selectedItemId}")
 

@@ -70,7 +70,7 @@ class CompareDrinksFragment : Fragment() {
                     displayDrink1(null)
                 } else {
                     d1SelectedPos = position
-                    drinkAdapter?.let {
+                    drinkAdapter.let {
                         val d1 = it.getItem(position)
                         displayDrink1(it.getItem(position))
                         val d2pos = binding.spnCmpDrink2Chooser.selectedItemPosition
@@ -100,7 +100,7 @@ class CompareDrinksFragment : Fragment() {
                     displayDrink2(null, null)
                 } else {
                     d2SelectedPos = position
-                    drinkAdapter?.let {
+                    drinkAdapter.let {
                         val d1pos = binding.spnCmpDrink1Chooser.selectedItemPosition
                         if (0 != d1pos) {
                             d1SelectedPos = d1pos
@@ -129,7 +129,7 @@ class CompareDrinksFragment : Fragment() {
             override fun afterTextChanged(s: Editable?) {
                 //Timber.d("Text was changed: ${s.toString()}")
                 s.toString().toIntOrNull() ?: return
-                drinkAdapter?.let { da ->
+                drinkAdapter.let { da ->
                     val d1pos = binding.spnCmpDrink1Chooser.selectedItemPosition
                     val d2pos = binding.spnCmpDrink2Chooser.selectedItemPosition
 

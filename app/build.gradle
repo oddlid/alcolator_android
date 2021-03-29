@@ -72,16 +72,28 @@ dependencies {
     // Test helpers
     testImplementation "androidx.room:room-testing:$rootProject.v_room"
 
-    // Lifecycle components
-    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.v_archLifeCycle"
-    //kapt "androidx.lifecycle:lifecycle-compiler:$rootProject.v_archLifeCycle"
-    implementation "android.arch.lifecycle:common-java8:$rootProject.v_lifeCycle_CommonJ8" // recommended over the above
     androidTestImplementation "androidx.arch.core:core-testing:$rootProject.v_androidxArch"
 
-    // ViewModel Kotlin support
+    // ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.v_archLifeCycle"
-    //implementation "android.arch.lifecycle:extensions:$rootProject.v_archLifeCycle"
-    //kapt "android.arch.lifecycle:compiler:$rootProject.v_archLifeCycle"
+    // LiveData
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.v_archLifeCycle"
+    // Saved state module for ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$rootProject.v_archLifeCycle"
+    // Jetpack Compose Integration for ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:$rootProject.v_viewModelCompose"
+    // Annotation processor
+    //kapt "androidx.lifecycle:lifecycle-compiler:$rootProject.v_archLifeCycle"
+    // alternately - if using Java8, use the following instead of lifecycle-compiler
+    implementation "androidx.lifecycle:lifecycle-common-java8:$rootProject.v_archLifeCycle"
+    // optional - helpers for implementing LifecycleOwner in a Service
+    //implementation "androidx.lifecycle:lifecycle-service:$rootProject.v_archLifeCycle"
+    // optional - ProcessLifecycleOwner provides a lifecycle for the whole application process
+    implementation "androidx.lifecycle:lifecycle-process:$rootProject.v_archLifeCycle"
+    // optional - ReactiveStreams support for LiveData
+    //implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:$rootProject.v_archLifeCycle"
+    // optional - Test helpers for LiveData
+    //testImplementation "androidx.arch.core:core-testing:$arch_version"
 
     // Coroutines
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.v_coroutines"

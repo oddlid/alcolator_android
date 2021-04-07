@@ -1,7 +1,6 @@
 package net.oddware.alcolator
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
@@ -12,14 +11,14 @@ class TagListAdapter(
     private val navCtl: NavController
 ) : RecyclerView.Adapter<TagListAdapter.TagViewHolder>() {
 
-    inner class TagViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val binding = TagListItemBinding.bind(itemView)
+    inner class TagViewHolder(var binding: TagListItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TagViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(viewType, parent, false)
+        val binding = TagListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
-        return TagViewHolder(view)
+        return TagViewHolder(binding)
     }
 
     override fun getItemViewType(position: Int): Int {

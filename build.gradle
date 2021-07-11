@@ -1,7 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlin_version = '1.4.31'
+    ext.kotlin_version = '1.5.20'
     ext.v_jetpackNav = '2.3.4'
     repositories {
         google()
@@ -35,7 +35,7 @@ ext {
     v_constraintLayout = '2.0.4'
     //v_sortableTableView = '2.8.1' // open source version from Github
     v_sortableTableView = '3.2.0' // license version
-    v_kotlinStdLib = '1.4.31'
+    v_kotlinStdLib = '1.5.20'
     v_appCompat = '1.4.0-alpha03'
     v_coreCtx = '1.6.0'
     v_timber = '4.7.1'
